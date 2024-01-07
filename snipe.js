@@ -43,6 +43,7 @@ class SeiSniper {
 
         this.snipeAmount = config.snipeAmount
         this.profitGoalPercent = config.profitGoalPercent
+        this.moonBagPercent = config.moonBagPercent
         this.stopLoss = config.stopLoss
         this.maxSpread = config.maxSpread
         this.tradeTimeLimit = config.tradeTimeLimit
@@ -869,7 +870,7 @@ class SeiSniper {
                 let result = await this.txManager.enqueue(msg);
 
                 if (!result) {
-                    console.log("Sell failed", msg);
+                    console.log("Sell failed".bgRed);
                     retryCount += 1;
                     spread += 0.2
                     if (!amount) {
@@ -1004,7 +1005,7 @@ class SeiSniper {
                 if (currentTime > moment(position.time_bought).add(this.tradeTimeLimit, 'minute')) {
                     console.log(`trade time limit reached (${this.tradeTimeLimit} minutes)`)
                     this.stopMonitoringPairToSell(pair)
-                    let balance = await this.getBalanceOfToken(memeTokenMeta.denom);
+                    let balance = await this.getBalanceOfToken(tokenDenom.denom);
                     result = await this.sellMemeToken(pair, balance)
                     return
                 }
@@ -1052,7 +1053,7 @@ class SeiSniper {
                             result = await this.sellMemeToken(pair, Number(position.balance) * 0.6)
                         }
                         else {
-                            result = await this.sellMemeToken(pair, Number(position.balance) * 0.85)
+                            result = await this.sellMemeToken(pair, Number(position.balance) * (1 - this.moonBagPercent))
                         }
                         return result
                     }
