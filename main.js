@@ -1,11 +1,12 @@
 const SeiSniper = require("./snipe")
 
-const LIVE_TRADING = false
+const LIVE_TRADING = true
 
 const CONFIG = {
     live: LIVE_TRADING,
-    rpc: "https://sei-rpc.brocha.in/",
-    rest: "https://sei-rest.brocha.in/",
+    rpc: "https://rpc.sei-apis.com/",
+    rest: "https://rest.sei-apis.com/",
+    chainId: "pacific-1",
     tokenTypes: ['native', 'tokenFactory', 'cw20'],
     pairType: '{"xyk":{}}',
     maxSpread: 0.49,
@@ -24,12 +25,15 @@ const main = async () => {
     await seiSniper.initialize();
     // await seiSniper.updateLiquidityAllPairs()
 
-    seiSniper.allPairs.forEach((pair) => {
-        console.log(`${pair.token0Meta.symbol} / ${pair.token1Meta.symbol} liquidity: $${pair.liquidity}, ${pair.coinhallLink}`)
-    })
+    // seiSniper.allPairs.forEach((pair) => {
+    //     console.log(`${pair.token0Meta.symbol} / ${pair.token1Meta.symbol} liquidity: $${pair.liquidity}, ${pair.coinhallLink}`)
+    // })
 
     seiSniper.startMonitoringBasePair(2)
     seiSniper.setMonitorNewPairs(true)
+
+    // let pair = await seiSniper.getPairInfo("sei17pcj9gjz29d3x5kh4tu5hkl988jfjmzk56rgxa0u84g5rwkcfqdqvp47gu")
+    // seiSniper.monitorPairForPriceChange(pair, 5, 5, 5)
 };
 
 main();

@@ -1,8 +1,9 @@
+const { calculateFee } = require('@cosmjs/stargate')
 
 class TransactionManager {
 
-    constructor(privateKey) {
-        this.privateKey = privateKey
+    constructor(signingCosmWasmClient) {
+        this.signingCosmWasmClient = signingCosmWasmClient
         this.queue = [];
         this.isProcessing = false;
     }
@@ -44,8 +45,10 @@ class TransactionManager {
 
     async signAndBroadcastTransaction(msg, memo = '') {
         try {
-
-
+            const fee = calculateFee(800000, "0.1usei");
+            const result = await this.signingCosmWasmClient.execute(msg.sender, msg.contractAddress, msg.msg, fee, memo, msg.funds);
+            console.log(result)
+            return result
         } catch (error) {
             console.error(`Error in signAndBroadcastTransaction: ${error}`);
         }
