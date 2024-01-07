@@ -714,7 +714,7 @@ class SeiSniper {
                 const result = await this.txManager.enqueue(msg);
                 if (result) {
                     await this.sendMessageToDiscord(`Buy executed successfully: https://www.seiscan.app/pacific-1/txs/${result.transactionHash}`)
-                    console.log(`Swap executed successfully: https://www.seiscan.app/pacific-1/txs/${result.transactionHash}`);
+                    console.log(`Swap executed successfully: https://www.seiscan.app/pacific-1/txs/${result.transactionHash}`.bgGreen);
 
                     const returnAmount = this.parseReturnAmountFromEvents(result);
 
@@ -869,7 +869,7 @@ class SeiSniper {
                 let result = await this.txManager.enqueue(msg);
 
                 if (!result) {
-                    console.log("Sell failed");
+                    console.log("Sell failed", msg);
                     retryCount += 1;
                     spread += 0.2
                     if (!amount) {
@@ -882,12 +882,12 @@ class SeiSniper {
                     this.stopMonitoringPairToSell(pair)
                     await this.sendMessageToDiscord(`Sell executed successfully: https://www.seiscan.app/pacific-1/txs/${result.transactionHash}`)
 
-                    console.log("Swap executed successfully:", result.transactionHash);
+                    console.log(`Swap executed successfully: https://www.seiscan.app/pacific-1/txs/${result.transactionHash}`.bgGreen);
 
                     let profit = 0
                     const returnAmount = this.parseReturnAmountFromEvents(result);
                     if (returnAmount !== undefined) {
-                        profit = returnAmount - position.amount_in
+                        profit = returnAmount - (position.amount_in + position.profit)
                     } else {
                         console.error("Return amount not found in sell events.");
                     }
@@ -1004,7 +1004,8 @@ class SeiSniper {
                 if (currentTime > moment(position.time_bought).add(this.tradeTimeLimit, 'minute')) {
                     console.log(`trade time limit reached (${this.tradeTimeLimit} minutes)`)
                     this.stopMonitoringPairToSell(pair)
-                    result = await this.sellMemeToken(pair, position.balance)
+                    let balance = await this.getBalanceOfToken(memeTokenMeta.denom);
+                    result = await this.sellMemeToken(pair, balance)
                     return
                 }
 
@@ -1030,15 +1031,21 @@ class SeiSniper {
                         return
                     }
 
-                    const percentageIncrease = ((quote.amount - position.amount_in) / position.amount_in) * 100;
+                    let amountIn = position.amount_in + position.profit
 
-                    if (percentageIncrease <= this.stopLoss * -1 && quote.amount < position.amount_in) {
-                        console.log(`stop loss hit for ${tokenDenom.symbol} ${percentageIncrease}%`)
+                    const percentageIncrease = ((quote.amount - amountIn) / amountIn) * 100;
+
+                    if (percentageIncrease <= this.stopLoss * -1 && quote.amount < amountIn) {
+                        console.log(`stop loss hit for ${tokenDenom.symbol} ${percentageIncrease}%`.bgRed)
                         this.stopMonitoringPairToSell(pair)
+
+                        let liquidity = await this.calculateLiquidity(pair)
+                        if (liquidity < 1) return
+
                         result = await this.sellMemeToken(pair, position.balance)
                         return
                     }
-                    if (percentageIncrease >= this.profitGoalPercent && quote.amount > position.amount_in) {
+                    if (percentageIncrease >= this.profitGoalPercent && quote.amount > amountIn) {
                         console.log(`profit goal reached for ${tokenDenom.symbol} ${percentageIncrease}%`)
                         this.stopMonitoringPairToSell(pair)
                         if (percentageIncrease >= this.profitGoalPercent * 2) {
@@ -1049,15 +1056,15 @@ class SeiSniper {
                         }
                         return result
                     }
-
-                    console.log(`${pairName}: balance: ${(convertedBalance).toFixed(2)} ${tokenDenom.symbol}, ` +
-                        `price: $${price.toFixed(8)} (${amountBack} ${this.baseAssetName} $${usdValue.toFixed(2)}) ${percentageIncrease.toFixed(2)}%`)
+                    let message = `${pairName}: balance: ${(convertedBalance).toFixed(2)} ${tokenDenom.symbol}, ` +
+                        `price: $${price.toFixed(8)} (${amountBack} ${this.baseAssetName} $${usdValue.toFixed(2)}) ${percentageIncrease.toFixed(2)}%`
+                    console.log(percentageIncrease > 0 ? message.green : message.red)
                 }
             }, intervalInSeconds * 1000);
 
             this.sellPairPriceMonitoringIntervals.set(pair.contract_addr, monitoringIntervalId);
 
-            console.log(`Sell - Monitoring started for ${pairName}.`);
+            console.log(`Sell - Monitoring started for ${pairName}.`.bgCyan);
         } catch (error) {
             console.error('Error monitoring pair:', error);
         }
@@ -1069,7 +1076,7 @@ class SeiSniper {
             clearInterval(this.sellPairPriceMonitoringIntervals.get(pair.contract_addr));
             this.sellPairPriceMonitoringIntervals.delete(pair.contract_addr);
 
-            console.log(`Monitoring to sell stopped for ${pairName}.`);
+            console.log(`Monitoring to sell stopped for ${pairName}.`.bgCyan);
         } else {
             console.log(`Pair ${pairName} is not being monitored.`);
         }
@@ -1159,7 +1166,7 @@ class SeiSniper {
                                 this.startMonitorPairForLiq(pairAddress);
                             }
                         } else {
-                            console.log(`Ignored pair ${pairAddress}:, ${pairInfo}`);
+                            console.log(`Ignored pair ${pairAddress}:, ${JSON.stringify(pairInfo, null, 2)}`);
                             this.sendMessageToDiscord(`Ignored new pair https://www.seiscan.app/pacific-1/contracts/${pairAddress}`);
                             this.ignoredPairs.add(pairAddress);
                         }
@@ -1222,7 +1229,7 @@ class SeiSniper {
                         this.sendMessageToDiscord(`:eyes: ${pairName} - Small liquidity added: $${liquidity.toFixed(2)}\n` +
                             `<t:${txTime.unix()}:R>\n${pair.astroportLink}\n${pair.coinhallLink}\n<@352761566401265664>`)
                         // await this.buyMemeToken(pair, this.snipeAmount / 10);
-                        await this.monitorPairForPriceChange(pair, 5, 5, 5)
+                        // await this.monitorPairForPriceChange(pair, 5, 5, 5)
                         return;
                     }
 
@@ -1257,8 +1264,6 @@ class SeiSniper {
     }
 
     async liquidityLoop() {
-        console.log(`liquidity loop: ${this.lowLiqPairsToMonitor.size > 0}`);
-
         while (this.lowLiqPairsToMonitor.size > 0) {
             for (const pair of this.lowLiqPairsToMonitor.values()) {
                 await this.checkPairForProvideLiquidity(pair);

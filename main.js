@@ -11,8 +11,8 @@ const CONFIG = {
     pairType: '{"xyk":{}}',
     maxSpread: 0.49,
     snipeAmount: 1, // SEI
-    profitGoalPercent: 35, // %
-    stopLoss: 50, // %
+    profitGoalPercent: 40, // %
+    stopLoss: 20, // %
     tradeTimeLimit: 1, // mins
     lowLiquidityThreshold: 500, // USD
     highLiquidityThreshold: 100000, // USD
