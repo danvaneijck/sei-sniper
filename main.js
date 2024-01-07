@@ -13,7 +13,7 @@ const CONFIG = {
     snipeAmount: 1, // SEI
     profitGoalPercent: 35, // %
     stopLoss: 50, // %
-    tradeTimeLimit: 600, // mins
+    tradeTimeLimit: 1, // mins
     lowLiquidityThreshold: 500, // USD
     highLiquidityThreshold: 100000, // USD
 }
@@ -32,8 +32,8 @@ const main = async () => {
     seiSniper.startMonitoringBasePair(2)
     seiSniper.setMonitorNewPairs(true)
 
-    // let pair = await seiSniper.getPairInfo("sei17pcj9gjz29d3x5kh4tu5hkl988jfjmzk56rgxa0u84g5rwkcfqdqvp47gu")
-    // seiSniper.monitorPairForPriceChange(pair, 5, 5, 5)
+    // let pair = await seiSniper.getPairInfo("sei1g6a4eplx6j73cvcm22ulv5vvqpahatlhgu90azlvjvzhslnld8mql4lak3")
+    // seiSniper.monitorPairToSell(pair, 5)
 };
 
 main();
