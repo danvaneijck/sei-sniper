@@ -1349,7 +1349,7 @@ class SeiSniper {
 
                                 if ((lpAdderAddress && this.scammerList.has(lpAdderAddress)) || (lpReceiverAddress && this.scammerList.has(lpReceiverAddress))) {
                                     await this.sendMessageToDiscord(
-                                        `Not buying pair ${pairName} as it was created by a known scammer\n` +
+                                        `Not buying pair ${pairName} as it was created by a known scammer ${this.discordTag}\n` +
                                         `LP added by: https://www.seiscan.app/pacific-1/accounts/${lpAdderAddress}\n` +
                                         `LP held by: https://www.seiscan.app/pacific-1/accounts/${lpReceiverAddress}`
                                     )
