@@ -15,9 +15,9 @@ const CONFIG = {
     pairType: '{"xyk":{}}',         // only basic 50 / 50 liquidity pairs
     maxSpread: 0.49,                // %
     snipeAmount: 5,                 // sei
-    profitGoalPercent: 20,          // %
-    moonBagPercent: 0.10,           // %
-    stopLoss: 20,                   // %
+    profitGoalPercent: 40,          // %
+    moonBagPercent: 0.20,           // %
+    stopLoss: 40,                   // %
     tradeTimeLimit: 5,              // minutes
     lowLiquidityThreshold: 2500,    // USD $
     highLiquidityThreshold: 100000, // USD $

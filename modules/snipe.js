@@ -101,7 +101,8 @@ class SeiSniper {
                 await this.sendMessageToDiscord(
                     `:arrows_clockwise: Start up Sei Sniper on RPC: ${this.rpc} | REST: ${this.rest}\n` +
                     `:chart_with_upwards_trend: Trading mode: ${this.live ? ':exclamation: LIVE :exclamation:' : 'TEST'}\n` +
-                    `:gun: Snipe amount: ${this.snipeAmount} ${this.baseAssetName} ($${(this.baseAssetPrice * this.snipeAmount).toFixed(2)})` +
+                    `:gun: Snipe amount: ${this.snipeAmount} ${this.baseAssetName} ($${(this.baseAssetPrice * this.snipeAmount).toFixed(2)}), ` +
+                    `profit goal: ${(this.profitGoalPercent).toFixed(2)}%, stop loss: ${(this.stopLoss).toFixed(2)}%,` +
                     ` targeting pairs between $${this.lowLiquidityThreshold} and $${this.highLiquidityThreshold} in liquidity`
                 )
                 this.discordClient.guilds.cache.forEach(guild => {
@@ -1363,7 +1364,7 @@ class SeiSniper {
                         }
                         else {
                             console.log(`Ignored pair ${contractAddress}, ${JSON.stringify(pair, null, 2)}`);
-                            this.sendMessageToDiscord(`Ignored new pair https://dexscreener.com/injective/${contractAddress}`);
+                            this.sendMessageToDiscord(`Ignored new pair https://www.seiscan.app/pacific-1/txs/${txResponse.txhash}`);
                             this.ignoredPairs.add(contractAddress);
                         }
                     }
@@ -1380,104 +1381,107 @@ class SeiSniper {
         }
     }
 
-    async checkForWithdrawLiquidity(pages = 1) {
+    async checkForWithdrawLiquidity() {
         try {
             const startTime = new Date().getTime();
 
-            for (let i = 0; i < pages; i++) {
-                const transactions = await this.queryClient.cosmos.tx.v1beta1.getTxsEvent({
-                    events: `wasm.action='withdraw_liquidity'`,
-                    orderBy: 2,
-                    pagination: i
-                });
+            const transactions = await this.queryClient.cosmos.tx.v1beta1.getTxsEvent({
+                events: `wasm.action='withdraw_liquidity'`,
+                orderBy: 2,
+            });
 
-                for (const txResponse of transactions.tx_responses) {
-                    const txTime = moment(txResponse['timestamp'], 'YYYY-MM-DD HH:mm:ss.SSS Z');
-                    let json = JSON.parse(txResponse.raw_log)
+            for (const txResponse of transactions.tx_responses.values()) {
+                if (this.withdrawLiqProcessedTx.has(txResponse.txhash)) continue
+                const txTime = moment(txResponse['timestamp'], 'YYYY-MM-DD HH:mm:ss.SSS Z');
+                let json = JSON.parse(txResponse.raw_log)
 
-                    if (this.withdrawLiqProcessedTx.has(txResponse.txhash)) continue
+                for (const j in json) {
+                    let event = json[j].events.find(x => x.type == "wasm")
+                    if (!event || !event.attributes) continue
+                    let isWithdrawLiquidity = event.attributes.find(x => x.key == "action" && x.value == "withdraw_liquidity")
+                    if (!isWithdrawLiquidity) continue
 
-                    for (const j in json) {
-                        let event = json[j].events.find(x => x.type == "wasm")
-                        if (!event || !event.attributes) continue
-                        let isWithdrawLiquidity = event.attributes.find(x => x.key == "action" && x.value == "withdraw_liquidity")
-                        if (!isWithdrawLiquidity) continue
+                    let assetValues = event.attributes.find(x => x.key === "refund_assets").value.split(',');
 
-                        let assetValues = event.attributes.find(x => x.key === "refund_assets").value.split(',');
+                    let baseAssetAmount = assetValues.map(asset => {
+                        const amountMatch = asset.match(/(\d+)usei/);
+                        return amountMatch ? amountMatch[1] : null;
+                    }).filter(amount => amount !== null)[0];
 
-                        let baseAssetAmount = assetValues.map(asset => {
-                            const amountMatch = asset.match(/(\d+)usei/);
-                            return amountMatch ? amountMatch[1] : null;
-                        }).filter(amount => amount !== null)[0];
+                    let otherAmount = assetValues.map(asset => {
+                        const amountMatch = asset.match(/(\d+)/);
+                        return amountMatch ? amountMatch[0] : null;
+                    }).filter(amount => amount !== null)[0];
 
-                        let otherAmount = assetValues.map(asset => {
-                            const amountMatch = asset.match(/(\d+)/);
-                            return amountMatch ? amountMatch[0] : null;
-                        }).filter(amount => amount !== null)[0];
+                    let contractAddress = undefined
+                    let senderAddress = undefined
+                    let lpReceiverAddress = undefined
 
-                        let contractAddress = undefined
-                        let senderAddress = undefined
-                        let lpReceiverAddress = undefined
-
-                        // get the _contract_address attribute that is directly before the provide_liquidity attribute (the pair contract address)
-                        for (let i = 1; i < event.attributes.length; i++) {
-                            if (event.attributes[i].key === 'action' && event.attributes[i].value === 'withdraw_liquidity') {
-                                if (event.attributes[i - 1] && event.attributes[i - 1].key === '_contract_address') {
-                                    contractAddress = event.attributes[i - 1].value
-                                }
-                            }
-                        }
-
-                        for (let i = 1; i < event.attributes.length; i++) {
-                            if (event.attributes[i].key === 'action' && event.attributes[i].value === 'withdraw_liquidity') {
-                                if (event.attributes[i + 1] && event.attributes[i + 1].key === 'sender') {
-                                    senderAddress = event.attributes[i + 1].value
-                                }
-                            }
-                        }
-
-                        for (let i = 1; i < event.attributes.length; i++) {
-                            if (event.attributes[i].key === 'action' && event.attributes[i].value === 'transfer') {
-                                if (event.attributes[i + 2] && event.attributes[i + 2].key === 'to') {
-                                    lpReceiverAddress = event.attributes[i + 2].value
-                                }
-                            }
-                        }
-
-                        if (this.allPairs.has(contractAddress) && !this.ruggedPairs.has(contractAddress)) {
-                            let pair = this.allPairs.get(contractAddress)
-                            const pairName = `${pair.token0Meta.symbol}, ${pair.token1Meta.symbol}`;
-                            const memeTokenMeta = pair.token0Meta.denom === this.baseDenom ? pair.token1Meta : pair.token0Meta;
-
-                            const baseAssetDecimals = 6;
-                            const baseAssetPrice = this.baseAssetPrice || 0;
-
-                            const numericBaseAssetAmount = Number(baseAssetAmount) / 10 ** baseAssetDecimals;
-                            const numericOtherAssetAmount = Number(otherAmount) / 10 ** memeTokenMeta.decimals;
-
-                            let liquidity = numericBaseAssetAmount * baseAssetPrice;
-                            liquidity = (liquidity * 2) / Math.pow(10, 0)
-
-                            if (txTime > moment().subtract(1, 'minute') && liquidity < 5) {
-                                this.sendMessageToDiscord(
-                                    `:eyes: ${pairName} - Liquidity rugged: $${liquidity.toFixed(2)}\n` +
-                                    `<t:${txTime.unix()}:R>\n` +
-                                    `${numericBaseAssetAmount} ${this.baseAssetName}, ${numericOtherAssetAmount} ${memeTokenMeta.symbol}\n` +
-                                    `withdraw_liquidity tx: https://www.seiscan.app/pacific-1/txs/${txResponse.txhash}\n` +
-                                    `withdrew by: https://www.seiscan.app/pacific-1/accounts/${senderAddress}\n` +
-                                    `sent to: https://www.seiscan.app/pacific-1/accounts/${lpReceiverAddress}\n` +
-                                    `pair contract: ${pair.seiscanLink}`
-                                )
-                            }
-                            if (liquidity < 5) {
-                                this.ruggedPairs.add(contractAddress)
-                                this.scammerList.add(senderAddress || lpReceiverAddress)
+                    // get the _contract_address attribute that is directly before the provide_liquidity attribute (the pair contract address)
+                    for (let i = 1; i < event.attributes.length; i++) {
+                        if (event.attributes[i].key === 'action' && event.attributes[i].value === 'withdraw_liquidity') {
+                            if (event.attributes[i - 1] && event.attributes[i - 1].key === '_contract_address') {
+                                contractAddress = event.attributes[i - 1].value
                             }
                         }
                     }
-                    this.withdrawLiqProcessedTx.add(txResponse.txhash)
+
+                    for (let i = 1; i < event.attributes.length; i++) {
+                        if (event.attributes[i].key === 'action' && event.attributes[i].value === 'withdraw_liquidity') {
+                            if (event.attributes[i + 1] && event.attributes[i + 1].key === 'sender') {
+                                senderAddress = event.attributes[i + 1].value
+                            }
+                        }
+                    }
+
+                    for (let i = 1; i < event.attributes.length; i++) {
+                        if (event.attributes[i].key === 'action' && event.attributes[i].value === 'transfer') {
+                            if (event.attributes[i + 2] && event.attributes[i + 2].key === 'to') {
+                                lpReceiverAddress = event.attributes[i + 2].value
+                            }
+                        }
+                    }
+
+                    if (!this.ruggedPairs.has(contractAddress)) {
+                        let pair = this.allPairs.get(contractAddress)
+                        if (!pair) continue
+                        const pairName = `${pair.token0Meta.symbol}, ${pair.token1Meta.symbol}`;
+                        const memeTokenMeta = pair.token0Meta.denom === this.baseDenom ? pair.token1Meta : pair.token0Meta;
+
+                        const baseAssetDecimals = 6;
+                        const baseAssetPrice = this.baseAssetPrice || 0;
+
+                        const numericBaseAssetAmount = Number(baseAssetAmount) / 10 ** baseAssetDecimals;
+                        const numericOtherAssetAmount = Number(otherAmount) / 10 ** memeTokenMeta.decimals;
+
+                        let liquidity_rugged = numericBaseAssetAmount * baseAssetPrice;
+                        liquidity_rugged = (liquidity_rugged * 2) / Math.pow(10, 0)
+
+                        let current_liquidity = await this.calculateLiquidity(pair)
+
+                        if (txTime > moment().subtract(1, 'minute')) {
+                            this.sendMessageToDiscord(
+                                `:eyes: ${pairName} - Liquidity rugged: $${liquidity_rugged.toFixed(2)}, current liquidity: $${current_liquidity.toFixed(2)}\n` +
+                                `<t:${txTime.unix()}:R>\n` +
+                                `${numericBaseAssetAmount} ${this.baseAssetName}, ${numericOtherAssetAmount} ${memeTokenMeta.symbol}\n` +
+                                `withdraw_liquidity tx: https://www.seiscan.app/pacific-1/txs/${txResponse.txhash}\n` +
+                                `withdrew by: https://www.seiscan.app/pacific-1/accounts/${senderAddress}\n` +
+                                `sent to: https://www.seiscan.app/pacific-1/accounts/${lpReceiverAddress}\n` +
+                                `pair contract: ${pair.seiscanLink}`
+                            )
+                        }
+                        if (!current_liquidity || current_liquidity < 5) {
+                            this.ruggedPairs.add(contractAddress)
+                            if (senderAddress) this.scammerList.add(senderAddress)
+                            if (lpReceiverAddress) this.scammerList.add(lpReceiverAddress)
+                            if (pair.lpAdderAddress) this.scammerList.add(pair.lpAdderAddress)
+                            if (pair.lpReceiverAddress) this.scammerList.add(pair.lpReceiverAddress)
+                        }
+                    }
                 }
+                this.withdrawLiqProcessedTx.add(txResponse.txhash)
             }
+
             // const endTime = new Date().getTime();
             // const executionTime = endTime - startTime;
             // console.log(`Finished check for withdraw_liquidity in ${executionTime} milliseconds`.gray);

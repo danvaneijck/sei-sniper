@@ -60,7 +60,9 @@
       "xyk": {}
     },
     "lpAdderAddress": "sei1gegwhue2c6u38r9ukr5t9l98pyxfx5hvcueru5",
-    "lpReceiverAddress": "sei1gegwhue2c6u38r9ukr5t9l98pyxfx5hvcueru5"
+    "lpReceiverAddress": "sei1gegwhue2c6u38r9ukr5t9l98pyxfx5hvcueru5",
+    "liquidity": 1598327.9309763536,
+    "liquidityUpdate": "2024-01-09T08:03:04.167Z"
   },
   {
     "token0Meta": {
@@ -123,7 +125,9 @@
       "xyk": {}
     },
     "lpAdderAddress": "sei1upd93rdktsd7m7e24pr0pckjq70txyxeux6f8w",
-    "lpReceiverAddress": "sei1upd93rdktsd7m7e24pr0pckjq70txyxeux6f8w"
+    "lpReceiverAddress": "sei1upd93rdktsd7m7e24pr0pckjq70txyxeux6f8w",
+    "liquidity": 0.0000015043236206124131,
+    "liquidityUpdate": "2024-01-09T08:02:56.393Z"
   },
   {
     "token0Meta": {
@@ -312,7 +316,9 @@
       "xyk": {}
     },
     "lpAdderAddress": "sei1amdkg54x2vsu6zhtsxlas6pslx278adr5ft267",
-    "lpReceiverAddress": "sei1amdkg54x2vsu6zhtsxlas6pslx278adr5ft267"
+    "lpReceiverAddress": "sei1amdkg54x2vsu6zhtsxlas6pslx278adr5ft267",
+    "liquidity": 0.00004813835585959722,
+    "liquidityUpdate": "2024-01-09T08:02:56.875Z"
   },
   {
     "token0Meta": {
@@ -436,7 +442,9 @@
     "pair_type": {
       "xyk": {}
     },
-    "lpReceiverAddress": "sei1ky0qlfchg8gy0mpz65xepfazwnlt548l50quak"
+    "lpReceiverAddress": "sei1ky0qlfchg8gy0mpz65xepfazwnlt548l50quak",
+    "liquidity": 0.000013538912585511721,
+    "liquidityUpdate": "2024-01-09T08:02:57.031Z"
   },
   {
     "token0Meta": {
@@ -499,7 +507,9 @@
       "xyk": {}
     },
     "lpAdderAddress": "sei17cugh4js8j2akhx3rqkguj26um06mg3kg4hdv6",
-    "lpReceiverAddress": "sei17cugh4js8j2akhx3rqkguj26um06mg3kg4hdv6"
+    "lpReceiverAddress": "sei17cugh4js8j2akhx3rqkguj26um06mg3kg4hdv6",
+    "liquidity": 1.6977345085145514,
+    "liquidityUpdate": "2024-01-09T08:02:57.359Z"
   },
   {
     "token0Meta": {
@@ -622,7 +632,9 @@
     "pair_type": {
       "xyk": {}
     },
-    "lpReceiverAddress": "sei1y3n8zr99fezktv8u2gzkt9vcpqfdjz9m5486eq"
+    "lpReceiverAddress": "sei1y3n8zr99fezktv8u2gzkt9vcpqfdjz9m5486eq",
+    "liquidity": 794939.1245851554,
+    "liquidityUpdate": "2024-01-09T08:03:04.010Z"
   },
   {
     "token0Meta": {
@@ -685,7 +697,9 @@
       "xyk": {}
     },
     "lpAdderAddress": "sei1y3n8zr99fezktv8u2gzkt9vcpqfdjz9m5486eq",
-    "lpReceiverAddress": "sei1y3n8zr99fezktv8u2gzkt9vcpqfdjz9m5486eq"
+    "lpReceiverAddress": "sei1y3n8zr99fezktv8u2gzkt9vcpqfdjz9m5486eq",
+    "liquidity": 118954.76899696844,
+    "liquidityUpdate": "2024-01-09T08:03:03.851Z"
   },
   {
     "token0Meta": {
@@ -748,7 +762,9 @@
       "xyk": {}
     },
     "lpAdderAddress": "sei1dqx0qu6ch2q30laxcrhtke2x5n2v87mczhdk7f",
-    "lpReceiverAddress": "sei1dqx0qu6ch2q30laxcrhtke2x5n2v87mczhdk7f"
+    "lpReceiverAddress": "sei1dqx0qu6ch2q30laxcrhtke2x5n2v87mczhdk7f",
+    "liquidity": 0.00032493390205228125,
+    "liquidityUpdate": "2024-01-09T08:02:57.702Z"
   },
   {
     "token0Meta": {
@@ -809,7 +825,9 @@
     "pair_type": {
       "xyk": {}
     },
-    "lpReceiverAddress": "sei1ky0qlfchg8gy0mpz65xepfazwnlt548l50quak"
+    "lpReceiverAddress": "sei1ky0qlfchg8gy0mpz65xepfazwnlt548l50quak",
+    "liquidity": 0.00005716429758327171,
+    "liquidityUpdate": "2024-01-09T08:02:57.856Z"
   },
   {
     "token0Meta": {
@@ -935,7 +953,9 @@
       "xyk": {}
     },
     "lpAdderAddress": "sei1mmtpjm477drkhnpv7aj545u90fn03e70tycr7u",
-    "lpReceiverAddress": "sei1mmtpjm477drkhnpv7aj545u90fn03e70tycr7u"
+    "lpReceiverAddress": "sei1mmtpjm477drkhnpv7aj545u90fn03e70tycr7u",
+    "liquidity": 0.000001504203639714617,
+    "liquidityUpdate": "2024-01-09T08:02:58.526Z"
   },
   {
     "token0Meta": {
@@ -998,7 +1018,9 @@
       "xyk": {}
     },
     "lpAdderAddress": "sei1555xj7lnl8lzmwnxws6wt79raa9rhh47zmtyz5",
-    "lpReceiverAddress": "sei1555xj7lnl8lzmwnxws6wt79raa9rhh47zmtyz5"
+    "lpReceiverAddress": "sei1555xj7lnl8lzmwnxws6wt79raa9rhh47zmtyz5",
+    "liquidity": 0.17955979688001328,
+    "liquidityUpdate": "2024-01-09T08:02:58.358Z"
   },
   {
     "token0Meta": {
@@ -1061,7 +1083,9 @@
       "xyk": {}
     },
     "lpAdderAddress": "sei1r6ytazeek6l0vtnp4fw6truh45r56dm0ek8p3u",
-    "lpReceiverAddress": "sei1r6ytazeek6l0vtnp4fw6truh45r56dm0ek8p3u"
+    "lpReceiverAddress": "sei1r6ytazeek6l0vtnp4fw6truh45r56dm0ek8p3u",
+    "liquidity": 0.00001955464731629002,
+    "liquidityUpdate": "2024-01-09T08:02:58.698Z"
   },
   {
     "token0Meta": {
@@ -1124,7 +1148,9 @@
       "xyk": {}
     },
     "lpAdderAddress": "sei1xfm9578e8q0ctagvza2hegvjw3wzgrrjr95ka3",
-    "lpReceiverAddress": "sei1xfm9578e8q0ctagvza2hegvjw3wzgrrjr95ka3"
+    "lpReceiverAddress": "sei1xfm9578e8q0ctagvza2hegvjw3wzgrrjr95ka3",
+    "liquidity": 6744.441054312707,
+    "liquidityUpdate": "2024-01-09T08:03:01.439Z"
   },
   {
     "token0Meta": {
@@ -1187,7 +1213,9 @@
       "xyk": {}
     },
     "lpAdderAddress": "sei1quawfu5xwhvhh2yr8szym6u583rhlcc007umy3",
-    "lpReceiverAddress": "sei1quawfu5xwhvhh2yr8szym6u583rhlcc007umy3"
+    "lpReceiverAddress": "sei1quawfu5xwhvhh2yr8szym6u583rhlcc007umy3",
+    "liquidity": 0.45142354590747424,
+    "liquidityUpdate": "2024-01-09T08:02:59.355Z"
   },
   {
     "token0Meta": {
@@ -1250,7 +1278,9 @@
       "xyk": {}
     },
     "lpAdderAddress": "sei1mz3pwtntxt26yeqlma5sujgf6cets897n3ptt0",
-    "lpReceiverAddress": "sei1mz3pwtntxt26yeqlma5sujgf6cets897n3ptt0"
+    "lpReceiverAddress": "sei1mz3pwtntxt26yeqlma5sujgf6cets897n3ptt0",
+    "liquidity": 119564.39599500113,
+    "liquidityUpdate": "2024-01-09T08:03:02.278Z"
   },
   {
     "token0Meta": {
@@ -1437,7 +1467,9 @@
     "pair_type": {
       "xyk": {}
     },
-    "lpReceiverAddress": "sei1ky0qlfchg8gy0mpz65xepfazwnlt548l50quak"
+    "lpReceiverAddress": "sei1ky0qlfchg8gy0mpz65xepfazwnlt548l50quak",
+    "liquidity": 0.00001805188344734896,
+    "liquidityUpdate": "2024-01-09T08:02:56.231Z"
   },
   {
     "token0Meta": {
@@ -1500,7 +1532,9 @@
       "xyk": {}
     },
     "lpAdderAddress": "sei1flyhcjtuzxsnhlm756askzk9gwdz7r7h3q4pss",
-    "lpReceiverAddress": "sei1flyhcjtuzxsnhlm756askzk9gwdz7r7h3q4pss"
+    "lpReceiverAddress": "sei1flyhcjtuzxsnhlm756askzk9gwdz7r7h3q4pss",
+    "liquidity": 0.0000015045045284262595,
+    "liquidityUpdate": "2024-01-09T08:02:56.079Z"
   },
   {
     "token0Meta": {
@@ -1626,7 +1660,9 @@
       "xyk": {}
     },
     "lpAdderAddress": "sei1sv228axh72fsv9z4fg47lwdj4rwhx543td6uj4",
-    "lpReceiverAddress": "sei1sv228axh72fsv9z4fg47lwdj4rwhx543td6uj4"
+    "lpReceiverAddress": "sei1sv228axh72fsv9z4fg47lwdj4rwhx543td6uj4",
+    "liquidity": 0.12962023604148798,
+    "liquidityUpdate": "2024-01-09T08:02:59.984Z"
   },
   {
     "token0Meta": {
@@ -1750,7 +1786,9 @@
       "xyk": {}
     },
     "lpAdderAddress": "sei1keyc6mg5makuyaxajt5cng2jmyp62zgs4kx6tl",
-    "lpReceiverAddress": "sei1keyc6mg5makuyaxajt5cng2jmyp62zgs4kx6tl"
+    "lpReceiverAddress": "sei1keyc6mg5makuyaxajt5cng2jmyp62zgs4kx6tl",
+    "liquidity": 1.2776735799808752,
+    "liquidityUpdate": "2024-01-09T08:02:58.871Z"
   },
   {
     "token0Meta": {
@@ -1813,7 +1851,9 @@
       "xyk": {}
     },
     "lpAdderAddress": "sei1sd5w6hz6492jkftwcmrkkm7ts65vq642jf96nr",
-    "lpReceiverAddress": "sei1sd5w6hz6492jkftwcmrkkm7ts65vq642jf96nr"
+    "lpReceiverAddress": "sei1sd5w6hz6492jkftwcmrkkm7ts65vq642jf96nr",
+    "liquidity": 0.029338884297887294,
+    "liquidityUpdate": "2024-01-09T08:03:00.315Z"
   },
   {
     "token0Meta": {
@@ -1876,7 +1916,9 @@
       "xyk": {}
     },
     "lpAdderAddress": "sei17px0t2krr6wn5yqf5f847eunkxcd4h5qt73laa",
-    "lpReceiverAddress": "sei17px0t2krr6wn5yqf5f847eunkxcd4h5qt73laa"
+    "lpReceiverAddress": "sei17px0t2krr6wn5yqf5f847eunkxcd4h5qt73laa",
+    "liquidity": 0.0000015040953705468725,
+    "liquidityUpdate": "2024-01-09T08:03:00.629Z"
   },
   {
     "token0Meta": {
@@ -1939,7 +1981,9 @@
       "xyk": {}
     },
     "lpAdderAddress": "sei1wfh9t08f8r2ljrtgx9n2wlw5w0fsg4csxe8n73",
-    "lpReceiverAddress": "sei1wfh9t08f8r2ljrtgx9n2wlw5w0fsg4csxe8n73"
+    "lpReceiverAddress": "sei1wfh9t08f8r2ljrtgx9n2wlw5w0fsg4csxe8n73",
+    "liquidity": 0.09020661575317813,
+    "liquidityUpdate": "2024-01-09T08:03:01.636Z"
   },
   {
     "token0Meta": {
@@ -2002,7 +2046,9 @@
       "xyk": {}
     },
     "lpAdderAddress": "sei1w9zdf84cnhvt9ha2yyjy827cnpqaa0uaw57sa5",
-    "lpReceiverAddress": "sei1w9zdf84cnhvt9ha2yyjy827cnpqaa0uaw57sa5"
+    "lpReceiverAddress": "sei1w9zdf84cnhvt9ha2yyjy827cnpqaa0uaw57sa5",
+    "liquidity": 0.015128191236960442,
+    "liquidityUpdate": "2024-01-09T08:03:00.468Z"
   },
   {
     "token0Meta": {
@@ -2191,7 +2237,9 @@
       "xyk": {}
     },
     "lpAdderAddress": "sei1gx682l0xtarftsf60az65f0cdj2cfgaatta6ap",
-    "lpReceiverAddress": "sei1gx682l0xtarftsf60az65f0cdj2cfgaatta6ap"
+    "lpReceiverAddress": "sei1gx682l0xtarftsf60az65f0cdj2cfgaatta6ap",
+    "liquidity": 0.1504110411500578,
+    "liquidityUpdate": "2024-01-09T08:03:01.808Z"
   },
   {
     "token0Meta": {
@@ -2254,7 +2302,9 @@
       "xyk": {}
     },
     "lpAdderAddress": "sei17hndvr6nnqrscltsamw42q8ej4wc70zpr7dccl",
-    "lpReceiverAddress": "sei17hndvr6nnqrscltsamw42q8ej4wc70zpr7dccl"
+    "lpReceiverAddress": "sei17hndvr6nnqrscltsamw42q8ej4wc70zpr7dccl",
+    "liquidity": 0.03976690039108165,
+    "liquidityUpdate": "2024-01-09T08:03:02.611Z"
   },
   {
     "token0Meta": {
@@ -2317,7 +2367,9 @@
       "xyk": {}
     },
     "lpAdderAddress": "sei1agq0vyzn03q33hk3ez0vq3pfsf8uw3ys9gckl8",
-    "lpReceiverAddress": "sei1agq0vyzn03q33hk3ez0vq3pfsf8uw3ys9gckl8"
+    "lpReceiverAddress": "sei1agq0vyzn03q33hk3ez0vq3pfsf8uw3ys9gckl8",
+    "liquidity": 0.0000015040953705468725,
+    "liquidityUpdate": "2024-01-09T08:03:02.123Z"
   },
   {
     "token0Meta": {
@@ -2380,7 +2432,9 @@
       "xyk": {}
     },
     "lpAdderAddress": "sei144x0sngwe88ym73xr339kzzvrc8x75x6hpkcnz",
-    "lpReceiverAddress": "sei144x0sngwe88ym73xr339kzzvrc8x75x6hpkcnz"
+    "lpReceiverAddress": "sei144x0sngwe88ym73xr339kzzvrc8x75x6hpkcnz",
+    "liquidity": 0.000001503758759352681,
+    "liquidityUpdate": "2024-01-09T08:03:02.917Z"
   },
   {
     "token0Meta": {
@@ -2443,7 +2497,9 @@
       "xyk": {}
     },
     "lpAdderAddress": "sei1knkxc3q2xdxwjnqvajlw2684a4jx7yye3ezzwe",
-    "lpReceiverAddress": "sei1knkxc3q2xdxwjnqvajlw2684a4jx7yye3ezzwe"
+    "lpReceiverAddress": "sei1knkxc3q2xdxwjnqvajlw2684a4jx7yye3ezzwe",
+    "liquidity": 0.000019548863871584852,
+    "liquidityUpdate": "2024-01-09T08:03:03.230Z"
   },
   {
     "token0Meta": {
@@ -2506,7 +2562,9 @@
       "xyk": {}
     },
     "lpAdderAddress": "sei1xf50cjz4llhawnslcry6mr8d98xf8tpmtgt4lp",
-    "lpReceiverAddress": "sei1xf50cjz4llhawnslcry6mr8d98xf8tpmtgt4lp"
+    "lpReceiverAddress": "sei1xf50cjz4llhawnslcry6mr8d98xf8tpmtgt4lp",
+    "liquidity": 0.000001503758759352681,
+    "liquidityUpdate": "2024-01-09T08:03:03.391Z"
   },
   {
     "token0Meta": {
@@ -2569,7 +2627,9 @@
       "xyk": {}
     },
     "lpAdderAddress": "sei1agq0vyzn03q33hk3ez0vq3pfsf8uw3ys9gckl8",
-    "lpReceiverAddress": "sei1agq0vyzn03q33hk3ez0vq3pfsf8uw3ys9gckl8"
+    "lpReceiverAddress": "sei1agq0vyzn03q33hk3ez0vq3pfsf8uw3ys9gckl8",
+    "liquidity": 0.000001503758759352681,
+    "liquidityUpdate": "2024-01-09T08:03:02.762Z"
   },
   {
     "token0Meta": {
@@ -2632,6 +2692,136 @@
       "xyk": {}
     },
     "lpAdderAddress": "sei1406k7rwda0vktvzs2zrktjv7mgxe8wqkqepuh2",
-    "lpReceiverAddress": "sei1406k7rwda0vktvzs2zrktjv7mgxe8wqkqepuh2"
+    "lpReceiverAddress": "sei1406k7rwda0vktvzs2zrktjv7mgxe8wqkqepuh2",
+    "liquidity": 0.17149696669078088,
+    "liquidityUpdate": "2024-01-09T08:02:55.544Z"
+  },
+  {
+    "token0Meta": {
+      "denom": "usei",
+      "seiscanLink": "https://www.seiscan.app/pacific-1/contracts/usei",
+      "name": "SEI",
+      "symbol": "SEI",
+      "decimals": 6,
+      "description": "sei",
+      "denom_units": [
+        {
+          "denom": "usei",
+          "exponent": 0,
+          "aliases": [
+            "microsei"
+          ]
+        },
+        {
+          "denom": "msei",
+          "exponent": 3,
+          "aliases": [
+            "millisei"
+          ]
+        },
+        {
+          "denom": "sei",
+          "exponent": 6,
+          "aliases": []
+        }
+      ],
+      "base": "usei",
+      "display": "sei"
+    },
+    "token1Meta": {
+      "denom": "sei1fy6kjsc8ghx53kt3u02c8jc4ter7v4854fw8mkj723hs2qr2yhmq37040p",
+      "seiscanLink": "https://www.seiscan.app/pacific-1/contracts/sei1fy6kjsc8ghx53kt3u02c8jc4ter7v4854fw8mkj723hs2qr2yhmq37040p",
+      "name": "BEEZ",
+      "symbol": "BEEZ",
+      "decimals": 6,
+      "total_supply": "1000000000000000000"
+    },
+    "seiscanLink": "https://www.seiscan.app/pacific-1/contracts/sei1txwag26zmk2pd3xx93s7gswlh52wg9evndymdtenwteyrd6uvm4q9glxjf",
+    "astroportLink": "https://app.astroport.fi/swap?from=usei&to=sei1fy6kjsc8ghx53kt3u02c8jc4ter7v4854fw8mkj723hs2qr2yhmq37040p",
+    "coinhallLink": "https://coinhall.org/sei/sei1txwag26zmk2pd3xx93s7gswlh52wg9evndymdtenwteyrd6uvm4q9glxjf",
+    "asset_infos": [
+      {
+        "native_token": {
+          "denom": "usei"
+        }
+      },
+      {
+        "token": {
+          "contract_addr": "sei1fy6kjsc8ghx53kt3u02c8jc4ter7v4854fw8mkj723hs2qr2yhmq37040p"
+        }
+      }
+    ],
+    "contract_addr": "sei1txwag26zmk2pd3xx93s7gswlh52wg9evndymdtenwteyrd6uvm4q9glxjf",
+    "liquidity_token": "sei19ldhl3z67yylcwa4u2myyuf2lmzvwnavks42uqerndn84l37uxqqjm97aj",
+    "pair_type": {
+      "xyk": {}
+    },
+    "liquidity": 0.40907628578362837,
+    "liquidityUpdate": "2024-01-09T08:02:55.727Z"
+  },
+  {
+    "token0Meta": {
+      "denom": "sei1yn37w6jka58cg6d62nr30gc0umgryq9plly0l4697ap4s5nvna2qzlcchn",
+      "seiscanLink": "https://www.seiscan.app/pacific-1/contracts/sei1yn37w6jka58cg6d62nr30gc0umgryq9plly0l4697ap4s5nvna2qzlcchn",
+      "name": "SABER",
+      "symbol": "SABER",
+      "decimals": 6,
+      "total_supply": "6942000000000000"
+    },
+    "token1Meta": {
+      "denom": "usei",
+      "seiscanLink": "https://www.seiscan.app/pacific-1/contracts/usei",
+      "name": "SEI",
+      "symbol": "SEI",
+      "decimals": 6,
+      "description": "sei",
+      "denom_units": [
+        {
+          "denom": "usei",
+          "exponent": 0,
+          "aliases": [
+            "microsei"
+          ]
+        },
+        {
+          "denom": "msei",
+          "exponent": 3,
+          "aliases": [
+            "millisei"
+          ]
+        },
+        {
+          "denom": "sei",
+          "exponent": 6,
+          "aliases": []
+        }
+      ],
+      "base": "usei",
+      "display": "sei"
+    },
+    "seiscanLink": "https://www.seiscan.app/pacific-1/contracts/sei1amvpjejy0cvkcxdvuwwk80wwuge7e2truj0jrcedlrfqrcua7e6q27q83c",
+    "astroportLink": "https://app.astroport.fi/swap?from=sei1yn37w6jka58cg6d62nr30gc0umgryq9plly0l4697ap4s5nvna2qzlcchn&to=usei",
+    "coinhallLink": "https://coinhall.org/sei/sei1amvpjejy0cvkcxdvuwwk80wwuge7e2truj0jrcedlrfqrcua7e6q27q83c",
+    "asset_infos": [
+      {
+        "token": {
+          "contract_addr": "sei1yn37w6jka58cg6d62nr30gc0umgryq9plly0l4697ap4s5nvna2qzlcchn"
+        }
+      },
+      {
+        "native_token": {
+          "denom": "usei"
+        }
+      }
+    ],
+    "contract_addr": "sei1amvpjejy0cvkcxdvuwwk80wwuge7e2truj0jrcedlrfqrcua7e6q27q83c",
+    "liquidity_token": "sei1grew5kd8tmm8n584w4y2m3q63evh98hg4dwwlmws603rqyczc84skxp5ys",
+    "pair_type": {
+      "xyk": {}
+    },
+    "lpAdderAddress": "sei1ctr7hk5l2gkh7wh5dyukal3vyh35ryh63lkf9s",
+    "lpReceiverAddress": "sei1ctr7hk5l2gkh7wh5dyukal3vyh35ryh63lkf9s",
+    "liquidity": 89841.75241390358,
+    "liquidityUpdate": "2024-01-09T08:00:45.056Z"
   }
 ]
