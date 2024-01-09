@@ -52,6 +52,7 @@ class SeiSniper {
         this.allPairs = new Map();
         this.ignoredPairs = new Set();
         this.ruggedPairs = new Set();
+        this.withdrawLiqProcessedTx = new Set()
 
         this.pairPriceMonitoringIntervals = new Map();
         this.sellPairPriceMonitoringIntervals = new Map();
@@ -263,6 +264,7 @@ class SeiSniper {
             this.positions = await this.loadMapFromFile('positions.json', 'pair_contract');
             this.ignoredPairs = await this.loadSetFromFile('ignoredPairs.json');
             this.ruggedPairs = await this.loadSetFromFile('ruggedPairs.json');
+            this.withdrawLiqProcessedTx = await this.loadSetFromFile('withdrawLiqProcessedTx.json');
 
             console.log('Loaded data from files'.gray);
         } catch (error) {
@@ -286,6 +288,7 @@ class SeiSniper {
             await this.saveDataToFile('positions.json', Array.from(this.positions.values()));
             await this.saveDataToFile('ignoredPairs.json', Array.from(this.ignoredPairs));
             await this.saveDataToFile('ruggedPairs.json', Array.from(this.ruggedPairs));
+            await this.saveDataToFile('withdrawLiqProcessedTx.json', Array.from(this.withdrawLiqProcessedTx));
         } catch (error) {
             console.error('Error saving data to files:', error);
         }
@@ -411,6 +414,10 @@ class SeiSniper {
                         : assetInfo['token']['contract_addr'];
 
                     let tokenInfo = undefined
+
+                    if (denom.includes("ibc")) {
+                        continue
+                    }
                     if (denom === this.baseDenom || denom.includes("factory")) {
                         tokenInfo = await this.getDenomMetadata(denom)
                         if (denom.includes("factory")) {
@@ -1374,6 +1381,8 @@ class SeiSniper {
                     const txTime = moment(txResponse['timestamp'], 'YYYY-MM-DD HH:mm:ss.SSS Z');
                     let json = JSON.parse(txResponse.raw_log)
 
+                    if (this.withdrawLiqProcessedTx.has(txResponse.txhash)) continue
+
                     for (const j in json) {
                         let event = json[j].events.find(x => x.type == "wasm")
                         if (!event || !event.attributes) continue
@@ -1422,7 +1431,7 @@ class SeiSniper {
                         }
 
                         if (this.allPairs.has(contractAddress) && !this.ruggedPairs.has(contractAddress)) {
-                            let pair = await this.getPairInfo(contractAddress)
+                            let pair = this.allPairs.get(contractAddress)
                             const pairName = `${pair.token0Meta.symbol}, ${pair.token1Meta.symbol}`;
                             const memeTokenMeta = pair.token0Meta.denom === this.baseDenom ? pair.token1Meta : pair.token0Meta;
 
@@ -1451,6 +1460,7 @@ class SeiSniper {
                             }
                         }
                     }
+                    this.withdrawLiqProcessedTx.add(txResponse.txhash)
                 }
             }
             // const endTime = new Date().getTime();
@@ -1468,17 +1478,17 @@ class SeiSniper {
 
         if (monitor) {
             this.sendMessageToDiscord(':dart: Begin monitoring for new Astroport liquidity')
-            this.newPairsLoop()
+            this.newLiquidityLoop()
         }
         else {
             this.sendMessageToDiscord(':pause_button: Stop monitoring for new Astroport liquidity')
         }
     }
 
-    async newPairsLoop() {
+    async newLiquidityLoop() {
         while (this.monitorNewPairs) {
             await this.checkForProvideLiquidity();
-            await new Promise(resolve => setTimeout(resolve, 100));
+            await new Promise(resolve => setTimeout(resolve, 1000));
         }
     }
 
@@ -1493,7 +1503,7 @@ class SeiSniper {
     async rugsLoop() {
         while (this.monitorRugs) {
             await this.checkForWithdrawLiquidity();
-            await new Promise(resolve => setTimeout(resolve, 2000));
+            await new Promise(resolve => setTimeout(resolve, 5000));
         }
     }
 
