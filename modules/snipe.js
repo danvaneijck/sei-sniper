@@ -1459,7 +1459,7 @@ class SeiSniper {
 
                         let current_liquidity = await this.calculateLiquidity(pair)
 
-                        if (txTime > moment().subtract(1, 'minute')) {
+                        if (txTime > moment().subtract(1, 'minute') && (!current_liquidity || current_liquidity < 5)) {
                             this.sendMessageToDiscord(
                                 `:eyes: ${pairName} - Liquidity rugged: $${liquidity_rugged.toFixed(2)}, current liquidity: $${current_liquidity.toFixed(2)}\n` +
                                 `<t:${txTime.unix()}:R>\n` +

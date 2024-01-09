@@ -61,8 +61,8 @@
     },
     "lpAdderAddress": "sei1gegwhue2c6u38r9ukr5t9l98pyxfx5hvcueru5",
     "lpReceiverAddress": "sei1gegwhue2c6u38r9ukr5t9l98pyxfx5hvcueru5",
-    "liquidity": 1593396.0892116823,
-    "liquidityUpdate": "2024-01-09T08:06:40.775Z"
+    "liquidity": 1354277.0087128654,
+    "liquidityUpdate": "2024-01-09T19:28:35.954Z"
   },
   {
     "token0Meta": {
@@ -253,7 +253,9 @@
       "xyk": {}
     },
     "lpAdderAddress": "sei150nk4xw3yrh5rqlmh9w87uk30x9gushrfuwufm",
-    "lpReceiverAddress": "sei150nk4xw3yrh5rqlmh9w87uk30x9gushrfuwufm"
+    "lpReceiverAddress": "sei150nk4xw3yrh5rqlmh9w87uk30x9gushrfuwufm",
+    "liquidity": 0.000014606281353239828,
+    "liquidityUpdate": "2024-01-09T14:13:29.709Z"
   },
   {
     "token0Meta": {
@@ -381,7 +383,9 @@
       "xyk": {}
     },
     "lpAdderAddress": "sei1xwke4xklwegwlv9zh5dlzfm94pkwmxzc23x5vg",
-    "lpReceiverAddress": "sei1xwke4xklwegwlv9zh5dlzfm94pkwmxzc23x5vg"
+    "lpReceiverAddress": "sei1xwke4xklwegwlv9zh5dlzfm94pkwmxzc23x5vg",
+    "liquidity": 169504.69766314304,
+    "liquidityUpdate": "2024-01-09T17:13:37.432Z"
   },
   {
     "token0Meta": {
@@ -571,7 +575,9 @@
     "pair_type": {
       "xyk": {}
     },
-    "lpReceiverAddress": "sei1rzg7w6hl6seaeyxand8vylyanm5dvlj29hu5z2"
+    "lpReceiverAddress": "sei1rzg7w6hl6seaeyxand8vylyanm5dvlj29hu5z2",
+    "liquidity": 138169.3578570444,
+    "liquidityUpdate": "2024-01-09T15:47:13.362Z"
   },
   {
     "token0Meta": {
@@ -633,8 +639,8 @@
       "xyk": {}
     },
     "lpReceiverAddress": "sei1y3n8zr99fezktv8u2gzkt9vcpqfdjz9m5486eq",
-    "liquidity": 792140.1130547479,
-    "liquidityUpdate": "2024-01-09T08:06:40.603Z"
+    "liquidity": 761306.229880566,
+    "liquidityUpdate": "2024-01-09T19:36:07.964Z"
   },
   {
     "token0Meta": {
@@ -698,8 +704,8 @@
     },
     "lpAdderAddress": "sei1y3n8zr99fezktv8u2gzkt9vcpqfdjz9m5486eq",
     "lpReceiverAddress": "sei1y3n8zr99fezktv8u2gzkt9vcpqfdjz9m5486eq",
-    "liquidity": 119180.12526289438,
-    "liquidityUpdate": "2024-01-09T08:06:40.449Z"
+    "liquidity": 122164.01434165223,
+    "liquidityUpdate": "2024-01-09T14:31:10.536Z"
   },
   {
     "token0Meta": {
@@ -890,7 +896,9 @@
       "xyk": {}
     },
     "lpAdderAddress": "sei10hfz5a8vx5n9nassyy0z0hzlhhgxtgpnlzp4rz",
-    "lpReceiverAddress": "sei10hfz5a8vx5n9nassyy0z0hzlhhgxtgpnlzp4rz"
+    "lpReceiverAddress": "sei10hfz5a8vx5n9nassyy0z0hzlhhgxtgpnlzp4rz",
+    "liquidity": 65025.12196898324,
+    "liquidityUpdate": "2024-01-09T12:48:06.832Z"
   },
   {
     "token0Meta": {
@@ -2111,7 +2119,9 @@
       "xyk": {}
     },
     "lpAdderAddress": "sei1agq0vyzn03q33hk3ez0vq3pfsf8uw3ys9gckl8",
-    "lpReceiverAddress": "sei1agq0vyzn03q33hk3ez0vq3pfsf8uw3ys9gckl8"
+    "lpReceiverAddress": "sei1agq0vyzn03q33hk3ez0vq3pfsf8uw3ys9gckl8",
+    "liquidity": 0.00000145885037309289,
+    "liquidityUpdate": "2024-01-09T09:31:09.551Z"
   },
   {
     "token0Meta": {
@@ -2823,5 +2833,1855 @@
     "lpReceiverAddress": "sei1ctr7hk5l2gkh7wh5dyukal3vyh35ryh63lkf9s",
     "liquidity": 89841.75241390358,
     "liquidityUpdate": "2024-01-09T08:00:45.056Z"
+  },
+  {
+    "token0Meta": {
+      "denom": "usei",
+      "seiscanLink": "https://www.seiscan.app/pacific-1/contracts/usei",
+      "name": "SEI",
+      "symbol": "SEI",
+      "decimals": 6,
+      "description": "sei",
+      "denom_units": [
+        {
+          "denom": "usei",
+          "exponent": 0,
+          "aliases": [
+            "microsei"
+          ]
+        },
+        {
+          "denom": "msei",
+          "exponent": 3,
+          "aliases": [
+            "millisei"
+          ]
+        },
+        {
+          "denom": "sei",
+          "exponent": 6,
+          "aliases": []
+        }
+      ],
+      "base": "usei",
+      "display": "sei"
+    },
+    "token1Meta": {
+      "denom": "factory/sei1w3q0snlnz2jfje0h6d0e88tdj70swyr6yuen60/dorsei",
+      "seiscanLink": "https://www.seiscan.app/pacific-1/contracts/factory/sei1w3q0snlnz2jfje0h6d0e88tdj70swyr6yuen60/dorsei",
+      "name": "dorsei",
+      "symbol": "dorsei",
+      "decimals": 6
+    },
+    "seiscanLink": "https://www.seiscan.app/pacific-1/contracts/sei1mqq8aqtjz672cluazr4my2ur28wtf8h37guhyhhjehf0jdun3ckqz4gp5e",
+    "astroportLink": "https://app.astroport.fi/swap?from=usei&to=factory/sei1w3q0snlnz2jfje0h6d0e88tdj70swyr6yuen60/dorsei",
+    "coinhallLink": "https://coinhall.org/sei/sei1mqq8aqtjz672cluazr4my2ur28wtf8h37guhyhhjehf0jdun3ckqz4gp5e",
+    "asset_infos": [
+      {
+        "native_token": {
+          "denom": "usei"
+        }
+      },
+      {
+        "native_token": {
+          "denom": "factory/sei1w3q0snlnz2jfje0h6d0e88tdj70swyr6yuen60/dorsei"
+        }
+      }
+    ],
+    "contract_addr": "sei1mqq8aqtjz672cluazr4my2ur28wtf8h37guhyhhjehf0jdun3ckqz4gp5e",
+    "liquidity_token": "sei1vgkg3jqyt58ze0j50ne6j9ke9murr45f88tuztw0ckhtfk72vunqysty4k",
+    "pair_type": {
+      "xyk": {}
+    },
+    "lpReceiverAddress": "sei1w3q0snlnz2jfje0h6d0e88tdj70swyr6yuen60",
+    "liquidity": 0.000027153417915997397,
+    "liquidityUpdate": "2024-01-09T08:29:44.341Z"
+  },
+  {
+    "token0Meta": {
+      "denom": "sei1v59mrw485axfgzwtxq8m9me59hjz04h9umlpp99wy9z4xkw3nqdql0nt53",
+      "seiscanLink": "https://www.seiscan.app/pacific-1/contracts/sei1v59mrw485axfgzwtxq8m9me59hjz04h9umlpp99wy9z4xkw3nqdql0nt53",
+      "name": "SeiPunia",
+      "symbol": "Punia",
+      "decimals": 6,
+      "total_supply": "1000000000000000"
+    },
+    "token1Meta": {
+      "denom": "usei",
+      "seiscanLink": "https://www.seiscan.app/pacific-1/contracts/usei",
+      "name": "SEI",
+      "symbol": "SEI",
+      "decimals": 6,
+      "description": "sei",
+      "denom_units": [
+        {
+          "denom": "usei",
+          "exponent": 0,
+          "aliases": [
+            "microsei"
+          ]
+        },
+        {
+          "denom": "msei",
+          "exponent": 3,
+          "aliases": [
+            "millisei"
+          ]
+        },
+        {
+          "denom": "sei",
+          "exponent": 6,
+          "aliases": []
+        }
+      ],
+      "base": "usei",
+      "display": "sei"
+    },
+    "seiscanLink": "https://www.seiscan.app/pacific-1/contracts/sei1mvaas08w45hn773f2hrjlsp55j9fu3lnuz6u5zqzkcgeup368htsnx052v",
+    "astroportLink": "https://app.astroport.fi/swap?from=sei1v59mrw485axfgzwtxq8m9me59hjz04h9umlpp99wy9z4xkw3nqdql0nt53&to=usei",
+    "coinhallLink": "https://coinhall.org/sei/sei1mvaas08w45hn773f2hrjlsp55j9fu3lnuz6u5zqzkcgeup368htsnx052v",
+    "asset_infos": [
+      {
+        "token": {
+          "contract_addr": "sei1v59mrw485axfgzwtxq8m9me59hjz04h9umlpp99wy9z4xkw3nqdql0nt53"
+        }
+      },
+      {
+        "native_token": {
+          "denom": "usei"
+        }
+      }
+    ],
+    "contract_addr": "sei1mvaas08w45hn773f2hrjlsp55j9fu3lnuz6u5zqzkcgeup368htsnx052v",
+    "liquidity_token": "sei1qkn3x93qafyz7wp72r3d8k8jfns4qft5c4kasvqdk5g092zdvu3qvqtrts",
+    "pair_type": {
+      "xyk": {}
+    },
+    "lpAdderAddress": "sei13xclz25l5gvls8nenem4ctnrfwsnjy8kl5w90e",
+    "lpReceiverAddress": "sei13xclz25l5gvls8nenem4ctnrfwsnjy8kl5w90e"
+  },
+  {
+    "token0Meta": {
+      "denom": "sei1htmfdwsn4yyr46wwye0uajmy3lqf8ae870rsj04l9ss3ncnxlpfsqt04fl",
+      "seiscanLink": "https://www.seiscan.app/pacific-1/contracts/sei1htmfdwsn4yyr46wwye0uajmy3lqf8ae870rsj04l9ss3ncnxlpfsqt04fl",
+      "name": "SEINY",
+      "symbol": "SEINY",
+      "decimals": 6,
+      "total_supply": "1000000000000000"
+    },
+    "token1Meta": {
+      "denom": "usei",
+      "seiscanLink": "https://www.seiscan.app/pacific-1/contracts/usei",
+      "name": "SEI",
+      "symbol": "SEI",
+      "decimals": 6,
+      "description": "sei",
+      "denom_units": [
+        {
+          "denom": "usei",
+          "exponent": 0,
+          "aliases": [
+            "microsei"
+          ]
+        },
+        {
+          "denom": "msei",
+          "exponent": 3,
+          "aliases": [
+            "millisei"
+          ]
+        },
+        {
+          "denom": "sei",
+          "exponent": 6,
+          "aliases": []
+        }
+      ],
+      "base": "usei",
+      "display": "sei"
+    },
+    "seiscanLink": "https://www.seiscan.app/pacific-1/contracts/sei132j0fn5vlvf7yta5semum25rtsavcdqthj80zyw5avy85lvwwl6qgqjud5",
+    "astroportLink": "https://app.astroport.fi/swap?from=sei1htmfdwsn4yyr46wwye0uajmy3lqf8ae870rsj04l9ss3ncnxlpfsqt04fl&to=usei",
+    "coinhallLink": "https://coinhall.org/sei/sei132j0fn5vlvf7yta5semum25rtsavcdqthj80zyw5avy85lvwwl6qgqjud5",
+    "asset_infos": [
+      {
+        "token": {
+          "contract_addr": "sei1htmfdwsn4yyr46wwye0uajmy3lqf8ae870rsj04l9ss3ncnxlpfsqt04fl"
+        }
+      },
+      {
+        "native_token": {
+          "denom": "usei"
+        }
+      }
+    ],
+    "contract_addr": "sei132j0fn5vlvf7yta5semum25rtsavcdqthj80zyw5avy85lvwwl6qgqjud5",
+    "liquidity_token": "sei1e6zaylz5mdkmyedt96730ug30c73gh2jkkn69k5fkmswtdza3xjq4l2mcw",
+    "pair_type": {
+      "xyk": {}
+    },
+    "lpAdderAddress": "sei1agq0vyzn03q33hk3ez0vq3pfsf8uw3ys9gckl8",
+    "lpReceiverAddress": "sei1agq0vyzn03q33hk3ez0vq3pfsf8uw3ys9gckl8",
+    "liquidity": 0.0000014562725781506027,
+    "liquidityUpdate": "2024-01-09T10:16:42.883Z"
+  },
+  {
+    "token0Meta": {
+      "denom": "sei1y2kef82xcjaxchdpfml8jvkp905606wvelsf9tp6tpdszqjf359qtndrc7",
+      "seiscanLink": "https://www.seiscan.app/pacific-1/contracts/sei1y2kef82xcjaxchdpfml8jvkp905606wvelsf9tp6tpdszqjf359qtndrc7",
+      "name": "Ayy say less fam",
+      "symbol": "SEILESS",
+      "decimals": 6,
+      "total_supply": "1000000000000"
+    },
+    "token1Meta": {
+      "denom": "usei",
+      "seiscanLink": "https://www.seiscan.app/pacific-1/contracts/usei",
+      "name": "SEI",
+      "symbol": "SEI",
+      "decimals": 6,
+      "description": "sei",
+      "denom_units": [
+        {
+          "denom": "usei",
+          "exponent": 0,
+          "aliases": [
+            "microsei"
+          ]
+        },
+        {
+          "denom": "msei",
+          "exponent": 3,
+          "aliases": [
+            "millisei"
+          ]
+        },
+        {
+          "denom": "sei",
+          "exponent": 6,
+          "aliases": []
+        }
+      ],
+      "base": "usei",
+      "display": "sei"
+    },
+    "seiscanLink": "https://www.seiscan.app/pacific-1/contracts/sei1e0sqgsf0r66y6drpem465vt68htqhfhkuua8aa7694qg4fcszmqq2juv6q",
+    "astroportLink": "https://app.astroport.fi/swap?from=sei1y2kef82xcjaxchdpfml8jvkp905606wvelsf9tp6tpdszqjf359qtndrc7&to=usei",
+    "coinhallLink": "https://coinhall.org/sei/sei1e0sqgsf0r66y6drpem465vt68htqhfhkuua8aa7694qg4fcszmqq2juv6q",
+    "asset_infos": [
+      {
+        "token": {
+          "contract_addr": "sei1y2kef82xcjaxchdpfml8jvkp905606wvelsf9tp6tpdszqjf359qtndrc7"
+        }
+      },
+      {
+        "native_token": {
+          "denom": "usei"
+        }
+      }
+    ],
+    "contract_addr": "sei1e0sqgsf0r66y6drpem465vt68htqhfhkuua8aa7694qg4fcszmqq2juv6q",
+    "liquidity_token": "sei1p0p942cvw4ad3pelewv078ee7x8uukv9p8se5tg3unap93xgy8jqmj3axc",
+    "pair_type": {
+      "xyk": {}
+    },
+    "lpReceiverAddress": "sei1zd778nhe3e8t9j8p29gqw32sgux08szzyhwc5j"
+  },
+  {
+    "token0Meta": {
+      "denom": "factory/sei1ujseuu80ykc0nyg6y6xu7xnj7g7arkcq49rthn/seition",
+      "seiscanLink": "https://www.seiscan.app/pacific-1/contracts/factory/sei1ujseuu80ykc0nyg6y6xu7xnj7g7arkcq49rthn/seition",
+      "name": "seition",
+      "symbol": "seition",
+      "decimals": 6
+    },
+    "token1Meta": {
+      "denom": "usei",
+      "seiscanLink": "https://www.seiscan.app/pacific-1/contracts/usei",
+      "name": "SEI",
+      "symbol": "SEI",
+      "decimals": 6,
+      "description": "sei",
+      "denom_units": [
+        {
+          "denom": "usei",
+          "exponent": 0,
+          "aliases": [
+            "microsei"
+          ]
+        },
+        {
+          "denom": "msei",
+          "exponent": 3,
+          "aliases": [
+            "millisei"
+          ]
+        },
+        {
+          "denom": "sei",
+          "exponent": 6,
+          "aliases": []
+        }
+      ],
+      "base": "usei",
+      "display": "sei"
+    },
+    "seiscanLink": "https://www.seiscan.app/pacific-1/contracts/sei17y2g97x2yank7wg69tduelh7t4veh2eajf6c0t22yz54rwt8tvmqlxs2km",
+    "astroportLink": "https://app.astroport.fi/swap?from=factory/sei1ujseuu80ykc0nyg6y6xu7xnj7g7arkcq49rthn/seition&to=usei",
+    "coinhallLink": "https://coinhall.org/sei/sei17y2g97x2yank7wg69tduelh7t4veh2eajf6c0t22yz54rwt8tvmqlxs2km",
+    "asset_infos": [
+      {
+        "native_token": {
+          "denom": "factory/sei1ujseuu80ykc0nyg6y6xu7xnj7g7arkcq49rthn/seition"
+        }
+      },
+      {
+        "native_token": {
+          "denom": "usei"
+        }
+      }
+    ],
+    "contract_addr": "sei17y2g97x2yank7wg69tduelh7t4veh2eajf6c0t22yz54rwt8tvmqlxs2km",
+    "liquidity_token": "sei1xt5za9ylnrv4q7clzsay9uqxm748lnmn7qt969nn40zsf02tr80sc99zuy",
+    "pair_type": {
+      "xyk": {}
+    },
+    "lpReceiverAddress": "sei1ujseuu80ykc0nyg6y6xu7xnj7g7arkcq49rthn",
+    "liquidity": 0.000018933122965614646,
+    "liquidityUpdate": "2024-01-09T10:12:55.008Z"
+  },
+  {
+    "token0Meta": {
+      "denom": "sei1t5gsqf2w7rvluwtewspfky2pz00gnq7uuz3kc7fk3etgsp67npxq2va2tt",
+      "seiscanLink": "https://www.seiscan.app/pacific-1/contracts/sei1t5gsqf2w7rvluwtewspfky2pz00gnq7uuz3kc7fk3etgsp67npxq2va2tt",
+      "name": "SEINPAI",
+      "symbol": "SEINPAI",
+      "decimals": 6,
+      "total_supply": "1000000000000000"
+    },
+    "token1Meta": {
+      "denom": "usei",
+      "seiscanLink": "https://www.seiscan.app/pacific-1/contracts/usei",
+      "name": "SEI",
+      "symbol": "SEI",
+      "decimals": 6,
+      "description": "sei",
+      "denom_units": [
+        {
+          "denom": "usei",
+          "exponent": 0,
+          "aliases": [
+            "microsei"
+          ]
+        },
+        {
+          "denom": "msei",
+          "exponent": 3,
+          "aliases": [
+            "millisei"
+          ]
+        },
+        {
+          "denom": "sei",
+          "exponent": 6,
+          "aliases": []
+        }
+      ],
+      "base": "usei",
+      "display": "sei"
+    },
+    "seiscanLink": "https://www.seiscan.app/pacific-1/contracts/sei17048hh7j0hlv6fgph00wmjewcr2690q22nlgapemp77seqp95hgsf7e8xf",
+    "astroportLink": "https://app.astroport.fi/swap?from=sei1t5gsqf2w7rvluwtewspfky2pz00gnq7uuz3kc7fk3etgsp67npxq2va2tt&to=usei",
+    "coinhallLink": "https://coinhall.org/sei/sei17048hh7j0hlv6fgph00wmjewcr2690q22nlgapemp77seqp95hgsf7e8xf",
+    "asset_infos": [
+      {
+        "token": {
+          "contract_addr": "sei1t5gsqf2w7rvluwtewspfky2pz00gnq7uuz3kc7fk3etgsp67npxq2va2tt"
+        }
+      },
+      {
+        "native_token": {
+          "denom": "usei"
+        }
+      }
+    ],
+    "contract_addr": "sei17048hh7j0hlv6fgph00wmjewcr2690q22nlgapemp77seqp95hgsf7e8xf",
+    "liquidity_token": "sei120u8h5uxqpfwl95gnf56nm7vgc9ax2n3w6af7cwkyyk3syg2p0cqkea7pj",
+    "pair_type": {
+      "xyk": {}
+    },
+    "lpAdderAddress": "sei1g2jk4j0w4k5ddurgvk9r08q5gphjumr3vsx666",
+    "lpReceiverAddress": "sei1g2jk4j0w4k5ddurgvk9r08q5gphjumr3vsx666",
+    "liquidity": 0.0000028761745945418402,
+    "liquidityUpdate": "2024-01-09T16:19:15.331Z"
+  },
+  {
+    "token0Meta": {
+      "denom": "sei1vn7qjljzy9e7nhphut9zul9ptfq44z6gh5fn6w9j36fcaxkt3lrsv92puv",
+      "seiscanLink": "https://www.seiscan.app/pacific-1/contracts/sei1vn7qjljzy9e7nhphut9zul9ptfq44z6gh5fn6w9j36fcaxkt3lrsv92puv",
+      "name": "SEIPEPE",
+      "symbol": "SEIPEPE",
+      "decimals": 6,
+      "total_supply": "1000000000000000"
+    },
+    "token1Meta": {
+      "denom": "usei",
+      "seiscanLink": "https://www.seiscan.app/pacific-1/contracts/usei",
+      "name": "SEI",
+      "symbol": "SEI",
+      "decimals": 6,
+      "description": "sei",
+      "denom_units": [
+        {
+          "denom": "usei",
+          "exponent": 0,
+          "aliases": [
+            "microsei"
+          ]
+        },
+        {
+          "denom": "msei",
+          "exponent": 3,
+          "aliases": [
+            "millisei"
+          ]
+        },
+        {
+          "denom": "sei",
+          "exponent": 6,
+          "aliases": []
+        }
+      ],
+      "base": "usei",
+      "display": "sei"
+    },
+    "seiscanLink": "https://www.seiscan.app/pacific-1/contracts/sei1f4h4gcj5k79akzj62m942mvsmdmjusk0nj0medj027cy560k8zss7srhwz",
+    "astroportLink": "https://app.astroport.fi/swap?from=sei1vn7qjljzy9e7nhphut9zul9ptfq44z6gh5fn6w9j36fcaxkt3lrsv92puv&to=usei",
+    "coinhallLink": "https://coinhall.org/sei/sei1f4h4gcj5k79akzj62m942mvsmdmjusk0nj0medj027cy560k8zss7srhwz",
+    "asset_infos": [
+      {
+        "token": {
+          "contract_addr": "sei1vn7qjljzy9e7nhphut9zul9ptfq44z6gh5fn6w9j36fcaxkt3lrsv92puv"
+        }
+      },
+      {
+        "native_token": {
+          "denom": "usei"
+        }
+      }
+    ],
+    "contract_addr": "sei1f4h4gcj5k79akzj62m942mvsmdmjusk0nj0medj027cy560k8zss7srhwz",
+    "liquidity_token": "sei12fjh8krm0ug2nm6nrvream42eanph37wmf9njlaama79lsgy885q8hgq6q",
+    "pair_type": {
+      "xyk": {}
+    },
+    "lpAdderAddress": "sei1agq0vyzn03q33hk3ez0vq3pfsf8uw3ys9gckl8",
+    "lpReceiverAddress": "sei1agq0vyzn03q33hk3ez0vq3pfsf8uw3ys9gckl8",
+    "liquidity": 0.0000014693156137251344,
+    "liquidityUpdate": "2024-01-09T12:43:36.862Z"
+  },
+  {
+    "token0Meta": {
+      "denom": "factory/sei1c8zzhtwqvznczcpa8dqteavu5a7xg58t9306q2/insein",
+      "seiscanLink": "https://www.seiscan.app/pacific-1/contracts/factory/sei1c8zzhtwqvznczcpa8dqteavu5a7xg58t9306q2/insein",
+      "name": "insein",
+      "symbol": "insein",
+      "decimals": 6
+    },
+    "token1Meta": {
+      "denom": "usei",
+      "seiscanLink": "https://www.seiscan.app/pacific-1/contracts/usei",
+      "name": "SEI",
+      "symbol": "SEI",
+      "decimals": 6,
+      "description": "sei",
+      "denom_units": [
+        {
+          "denom": "usei",
+          "exponent": 0,
+          "aliases": [
+            "microsei"
+          ]
+        },
+        {
+          "denom": "msei",
+          "exponent": 3,
+          "aliases": [
+            "millisei"
+          ]
+        },
+        {
+          "denom": "sei",
+          "exponent": 6,
+          "aliases": []
+        }
+      ],
+      "base": "usei",
+      "display": "sei"
+    },
+    "seiscanLink": "https://www.seiscan.app/pacific-1/contracts/sei1uu4f5m9zjhwh73te3p9kn4nu9h0800l5dkyfjc903fxykyx3datq877f5a",
+    "astroportLink": "https://app.astroport.fi/swap?from=factory/sei1c8zzhtwqvznczcpa8dqteavu5a7xg58t9306q2/insein&to=usei",
+    "coinhallLink": "https://coinhall.org/sei/sei1uu4f5m9zjhwh73te3p9kn4nu9h0800l5dkyfjc903fxykyx3datq877f5a",
+    "asset_infos": [
+      {
+        "native_token": {
+          "denom": "factory/sei1c8zzhtwqvznczcpa8dqteavu5a7xg58t9306q2/insein"
+        }
+      },
+      {
+        "native_token": {
+          "denom": "usei"
+        }
+      }
+    ],
+    "contract_addr": "sei1uu4f5m9zjhwh73te3p9kn4nu9h0800l5dkyfjc903fxykyx3datq877f5a",
+    "liquidity_token": "sei10y69qt9trcgvxmg6hfzy3qnjl5dplwtghqre9f40j3yjalz3ehhqmd9mqr",
+    "pair_type": {
+      "xyk": {}
+    },
+    "lpReceiverAddress": "sei1c8zzhtwqvznczcpa8dqteavu5a7xg58t9306q2",
+    "liquidity": 0.00004103216857442325,
+    "liquidityUpdate": "2024-01-09T10:28:49.081Z"
+  },
+  {
+    "token0Meta": {
+      "denom": "usei",
+      "seiscanLink": "https://www.seiscan.app/pacific-1/contracts/usei",
+      "name": "SEI",
+      "symbol": "SEI",
+      "decimals": 6,
+      "description": "sei",
+      "denom_units": [
+        {
+          "denom": "usei",
+          "exponent": 0,
+          "aliases": [
+            "microsei"
+          ]
+        },
+        {
+          "denom": "msei",
+          "exponent": 3,
+          "aliases": [
+            "millisei"
+          ]
+        },
+        {
+          "denom": "sei",
+          "exponent": 6,
+          "aliases": []
+        }
+      ],
+      "base": "usei",
+      "display": "sei"
+    },
+    "token1Meta": {
+      "denom": "sei1ajwmaynzjuekhs2tyv7qvvsu8dnw5d5ug0suzvt3353rz0t5ltwsflty4r",
+      "seiscanLink": "https://www.seiscan.app/pacific-1/contracts/sei1ajwmaynzjuekhs2tyv7qvvsu8dnw5d5ug0suzvt3353rz0t5ltwsflty4r",
+      "name": "SEINU",
+      "symbol": "SEINU",
+      "decimals": 6,
+      "total_supply": "10000000000000000000"
+    },
+    "seiscanLink": "https://www.seiscan.app/pacific-1/contracts/sei1jeqmlhstuumxa8hhu357nwq7wc7sg2em00vpejz6zlgj0st7vucshflugw",
+    "astroportLink": "https://app.astroport.fi/swap?from=usei&to=sei1ajwmaynzjuekhs2tyv7qvvsu8dnw5d5ug0suzvt3353rz0t5ltwsflty4r",
+    "coinhallLink": "https://coinhall.org/sei/sei1jeqmlhstuumxa8hhu357nwq7wc7sg2em00vpejz6zlgj0st7vucshflugw",
+    "asset_infos": [
+      {
+        "native_token": {
+          "denom": "usei"
+        }
+      },
+      {
+        "token": {
+          "contract_addr": "sei1ajwmaynzjuekhs2tyv7qvvsu8dnw5d5ug0suzvt3353rz0t5ltwsflty4r"
+        }
+      }
+    ],
+    "contract_addr": "sei1jeqmlhstuumxa8hhu357nwq7wc7sg2em00vpejz6zlgj0st7vucshflugw",
+    "liquidity_token": "sei1ecg7vttnv4jt3rcuwuvxd0snjjmpngrtxnkw3g6kry3044pnrunqmhl2sy",
+    "pair_type": {
+      "xyk": {}
+    },
+    "lpAdderAddress": "sei1jptw23qtlw5fsg04246tdl8jn5wmnffjsspmdy",
+    "lpReceiverAddress": "sei1jptw23qtlw5fsg04246tdl8jn5wmnffjsspmdy"
+  },
+  {
+    "token0Meta": {
+      "denom": "sei1kl7dtm0cz333n7nc3en6uaw7etcalt4kp93a96cjq5xx4k83z7yqcmyegj",
+      "seiscanLink": "https://www.seiscan.app/pacific-1/contracts/sei1kl7dtm0cz333n7nc3en6uaw7etcalt4kp93a96cjq5xx4k83z7yqcmyegj",
+      "name": "SeiFrogs",
+      "symbol": "SeiFrogs",
+      "decimals": 6,
+      "total_supply": "1000000000000000"
+    },
+    "token1Meta": {
+      "denom": "usei",
+      "seiscanLink": "https://www.seiscan.app/pacific-1/contracts/usei",
+      "name": "SEI",
+      "symbol": "SEI",
+      "decimals": 6,
+      "description": "sei",
+      "denom_units": [
+        {
+          "denom": "usei",
+          "exponent": 0,
+          "aliases": [
+            "microsei"
+          ]
+        },
+        {
+          "denom": "msei",
+          "exponent": 3,
+          "aliases": [
+            "millisei"
+          ]
+        },
+        {
+          "denom": "sei",
+          "exponent": 6,
+          "aliases": []
+        }
+      ],
+      "base": "usei",
+      "display": "sei"
+    },
+    "seiscanLink": "https://www.seiscan.app/pacific-1/contracts/sei1urxpxlhjgmqm7nlflvetpyc9pngrtfhcvp0rs6tfdkxsdcy4drfqgmt7ps",
+    "astroportLink": "https://app.astroport.fi/swap?from=sei1kl7dtm0cz333n7nc3en6uaw7etcalt4kp93a96cjq5xx4k83z7yqcmyegj&to=usei",
+    "coinhallLink": "https://coinhall.org/sei/sei1urxpxlhjgmqm7nlflvetpyc9pngrtfhcvp0rs6tfdkxsdcy4drfqgmt7ps",
+    "asset_infos": [
+      {
+        "token": {
+          "contract_addr": "sei1kl7dtm0cz333n7nc3en6uaw7etcalt4kp93a96cjq5xx4k83z7yqcmyegj"
+        }
+      },
+      {
+        "native_token": {
+          "denom": "usei"
+        }
+      }
+    ],
+    "contract_addr": "sei1urxpxlhjgmqm7nlflvetpyc9pngrtfhcvp0rs6tfdkxsdcy4drfqgmt7ps",
+    "liquidity_token": "sei14hh7v40l2sn94nzpd3jpy7j3ffd5mwmsh42m7dwdsejph5ap9f8qqkyysv",
+    "pair_type": {
+      "xyk": {}
+    },
+    "lpAdderAddress": "sei1agq0vyzn03q33hk3ez0vq3pfsf8uw3ys9gckl8",
+    "lpReceiverAddress": "sei1agq0vyzn03q33hk3ez0vq3pfsf8uw3ys9gckl8",
+    "liquidity": 0.0000014235311447906058,
+    "liquidityUpdate": "2024-01-09T14:42:55.309Z"
+  },
+  {
+    "token0Meta": {
+      "denom": "sei10uemrwz3hgdvm6aeacl49da6jwxc56tctl9elvj6gleg9aqvuels7zw0dn",
+      "seiscanLink": "https://www.seiscan.app/pacific-1/contracts/sei10uemrwz3hgdvm6aeacl49da6jwxc56tctl9elvj6gleg9aqvuels7zw0dn",
+      "name": "SeiTiny",
+      "symbol": "SeiTiny",
+      "decimals": 6,
+      "total_supply": "100000000000000000"
+    },
+    "token1Meta": {
+      "denom": "usei",
+      "seiscanLink": "https://www.seiscan.app/pacific-1/contracts/usei",
+      "name": "SEI",
+      "symbol": "SEI",
+      "decimals": 6,
+      "description": "sei",
+      "denom_units": [
+        {
+          "denom": "usei",
+          "exponent": 0,
+          "aliases": [
+            "microsei"
+          ]
+        },
+        {
+          "denom": "msei",
+          "exponent": 3,
+          "aliases": [
+            "millisei"
+          ]
+        },
+        {
+          "denom": "sei",
+          "exponent": 6,
+          "aliases": []
+        }
+      ],
+      "base": "usei",
+      "display": "sei"
+    },
+    "seiscanLink": "https://www.seiscan.app/pacific-1/contracts/sei16dw8q4vr32h60y3h8dpazjs6lqzae8v7qxvn055qv643gazdzq3qvf5lpu",
+    "astroportLink": "https://app.astroport.fi/swap?from=sei10uemrwz3hgdvm6aeacl49da6jwxc56tctl9elvj6gleg9aqvuels7zw0dn&to=usei",
+    "coinhallLink": "https://coinhall.org/sei/sei16dw8q4vr32h60y3h8dpazjs6lqzae8v7qxvn055qv643gazdzq3qvf5lpu",
+    "asset_infos": [
+      {
+        "token": {
+          "contract_addr": "sei10uemrwz3hgdvm6aeacl49da6jwxc56tctl9elvj6gleg9aqvuels7zw0dn"
+        }
+      },
+      {
+        "native_token": {
+          "denom": "usei"
+        }
+      }
+    ],
+    "contract_addr": "sei16dw8q4vr32h60y3h8dpazjs6lqzae8v7qxvn055qv643gazdzq3qvf5lpu",
+    "liquidity_token": "sei1raquzt9w2vyz3rtlfjahafkeuf8nnhe3mpegynj539qwrxxu84asm9r2xe",
+    "pair_type": {
+      "xyk": {}
+    },
+    "lpAdderAddress": "sei18pek5skwf3phf9elsfpscsffejwhl4k6ks7em2",
+    "lpReceiverAddress": "sei18pek5skwf3phf9elsfpscsffejwhl4k6ks7em2",
+    "liquidity": 0.000001461294466432267,
+    "liquidityUpdate": "2024-01-09T14:12:41.438Z"
+  },
+  {
+    "token0Meta": {
+      "denom": "sei1k33hmgn6pme7ph8neaf5hv5nu24x77wh6c5re2cn39fzqc8wlp9q27rhe5",
+      "seiscanLink": "https://www.seiscan.app/pacific-1/contracts/sei1k33hmgn6pme7ph8neaf5hv5nu24x77wh6c5re2cn39fzqc8wlp9q27rhe5",
+      "name": "SEIRMIT",
+      "symbol": "SEIRMIT",
+      "decimals": 6,
+      "total_supply": "7000000000000"
+    },
+    "token1Meta": {
+      "denom": "usei",
+      "seiscanLink": "https://www.seiscan.app/pacific-1/contracts/usei",
+      "name": "SEI",
+      "symbol": "SEI",
+      "decimals": 6,
+      "description": "sei",
+      "denom_units": [
+        {
+          "denom": "usei",
+          "exponent": 0,
+          "aliases": [
+            "microsei"
+          ]
+        },
+        {
+          "denom": "msei",
+          "exponent": 3,
+          "aliases": [
+            "millisei"
+          ]
+        },
+        {
+          "denom": "sei",
+          "exponent": 6,
+          "aliases": []
+        }
+      ],
+      "base": "usei",
+      "display": "sei"
+    },
+    "seiscanLink": "https://www.seiscan.app/pacific-1/contracts/sei12xsvr47lpwajpmaf7pt3qemyukxgddu2kmx5aa4ek7mwrp0nhe5sx3kg6c",
+    "astroportLink": "https://app.astroport.fi/swap?from=sei1k33hmgn6pme7ph8neaf5hv5nu24x77wh6c5re2cn39fzqc8wlp9q27rhe5&to=usei",
+    "coinhallLink": "https://coinhall.org/sei/sei12xsvr47lpwajpmaf7pt3qemyukxgddu2kmx5aa4ek7mwrp0nhe5sx3kg6c",
+    "asset_infos": [
+      {
+        "token": {
+          "contract_addr": "sei1k33hmgn6pme7ph8neaf5hv5nu24x77wh6c5re2cn39fzqc8wlp9q27rhe5"
+        }
+      },
+      {
+        "native_token": {
+          "denom": "usei"
+        }
+      }
+    ],
+    "contract_addr": "sei12xsvr47lpwajpmaf7pt3qemyukxgddu2kmx5aa4ek7mwrp0nhe5sx3kg6c",
+    "liquidity_token": "sei1tgx6uhhayd7naufy728w0eqvkhgsup7f3y0u6uvysu33rn6e9dxs49605f",
+    "pair_type": {
+      "xyk": {}
+    },
+    "liquidity": 0.000057239353275716195,
+    "liquidityUpdate": "2024-01-09T18:54:45.716Z"
+  },
+  {
+    "token0Meta": {
+      "denom": "sei1xvrlwyd3u724mtgsdh0h6ncew5e4wzxl5e2rjqa8n550v09khxuq36300a",
+      "seiscanLink": "https://www.seiscan.app/pacific-1/contracts/sei1xvrlwyd3u724mtgsdh0h6ncew5e4wzxl5e2rjqa8n550v09khxuq36300a",
+      "name": "Dagora",
+      "symbol": "Dagora",
+      "decimals": 6,
+      "total_supply": "100000000000000000"
+    },
+    "token1Meta": {
+      "denom": "usei",
+      "seiscanLink": "https://www.seiscan.app/pacific-1/contracts/usei",
+      "name": "SEI",
+      "symbol": "SEI",
+      "decimals": 6,
+      "description": "sei",
+      "denom_units": [
+        {
+          "denom": "usei",
+          "exponent": 0,
+          "aliases": [
+            "microsei"
+          ]
+        },
+        {
+          "denom": "msei",
+          "exponent": 3,
+          "aliases": [
+            "millisei"
+          ]
+        },
+        {
+          "denom": "sei",
+          "exponent": 6,
+          "aliases": []
+        }
+      ],
+      "base": "usei",
+      "display": "sei"
+    },
+    "seiscanLink": "https://www.seiscan.app/pacific-1/contracts/sei14prv42eplqh2lasjdapw839hthg8rp3xvy4plck3a28td23lrlcsrvruhx",
+    "astroportLink": "https://app.astroport.fi/swap?from=sei1xvrlwyd3u724mtgsdh0h6ncew5e4wzxl5e2rjqa8n550v09khxuq36300a&to=usei",
+    "coinhallLink": "https://coinhall.org/sei/sei14prv42eplqh2lasjdapw839hthg8rp3xvy4plck3a28td23lrlcsrvruhx",
+    "asset_infos": [
+      {
+        "token": {
+          "contract_addr": "sei1xvrlwyd3u724mtgsdh0h6ncew5e4wzxl5e2rjqa8n550v09khxuq36300a"
+        }
+      },
+      {
+        "native_token": {
+          "denom": "usei"
+        }
+      }
+    ],
+    "contract_addr": "sei14prv42eplqh2lasjdapw839hthg8rp3xvy4plck3a28td23lrlcsrvruhx",
+    "liquidity_token": "sei18ljfj4rwu8h8e4d2ktmw0hvudkfajk3d2qzus8n5kdpx5kxvhawq5e0hvn",
+    "pair_type": {
+      "xyk": {}
+    },
+    "lpAdderAddress": "sei1h58mxmhnn9jhx8d2wphgqyts0s20futa7fej34",
+    "lpReceiverAddress": "sei1h58mxmhnn9jhx8d2wphgqyts0s20futa7fej34",
+    "liquidity": 0.0000014251622499380889,
+    "liquidityUpdate": "2024-01-09T14:38:36.411Z"
+  },
+  {
+    "token0Meta": {
+      "denom": "sei1dd0ymwcl58rfyzu86gh24y3dhx34xv734y7r6efs2x0n2sytx5aszh9g4l",
+      "seiscanLink": "https://www.seiscan.app/pacific-1/contracts/sei1dd0ymwcl58rfyzu86gh24y3dhx34xv734y7r6efs2x0n2sytx5aszh9g4l",
+      "name": "TurtleonSEI",
+      "symbol": "TURTLE",
+      "decimals": 6,
+      "total_supply": "1000000000000000"
+    },
+    "token1Meta": {
+      "denom": "usei",
+      "seiscanLink": "https://www.seiscan.app/pacific-1/contracts/usei",
+      "name": "SEI",
+      "symbol": "SEI",
+      "decimals": 6,
+      "description": "sei",
+      "denom_units": [
+        {
+          "denom": "usei",
+          "exponent": 0,
+          "aliases": [
+            "microsei"
+          ]
+        },
+        {
+          "denom": "msei",
+          "exponent": 3,
+          "aliases": [
+            "millisei"
+          ]
+        },
+        {
+          "denom": "sei",
+          "exponent": 6,
+          "aliases": []
+        }
+      ],
+      "base": "usei",
+      "display": "sei"
+    },
+    "seiscanLink": "https://www.seiscan.app/pacific-1/contracts/sei1rn3fr8hcxlmh9jsfkafre2234yk7vcdnze3r6uw4duqfnnvlgawqfgccwg",
+    "astroportLink": "https://app.astroport.fi/swap?from=sei1dd0ymwcl58rfyzu86gh24y3dhx34xv734y7r6efs2x0n2sytx5aszh9g4l&to=usei",
+    "coinhallLink": "https://coinhall.org/sei/sei1rn3fr8hcxlmh9jsfkafre2234yk7vcdnze3r6uw4duqfnnvlgawqfgccwg",
+    "asset_infos": [
+      {
+        "token": {
+          "contract_addr": "sei1dd0ymwcl58rfyzu86gh24y3dhx34xv734y7r6efs2x0n2sytx5aszh9g4l"
+        }
+      },
+      {
+        "native_token": {
+          "denom": "usei"
+        }
+      }
+    ],
+    "contract_addr": "sei1rn3fr8hcxlmh9jsfkafre2234yk7vcdnze3r6uw4duqfnnvlgawqfgccwg",
+    "liquidity_token": "sei15fl8dxr2uu7k56qrvnkxkftdss5vsufd7faeqrdlaasc42n5szzqvkw5vu",
+    "pair_type": {
+      "xyk": {}
+    },
+    "lpAdderAddress": "sei1j5hx63y9gmp98kgvxd7dlyyq47q9z7a5dtt5h8",
+    "lpReceiverAddress": "sei1j5hx63y9gmp98kgvxd7dlyyq47q9z7a5dtt5h8"
+  },
+  {
+    "token0Meta": {
+      "denom": "sei1w03wk9wpfah0mczgzlyf37ve98zdx9sl8wp254agfqzkh5gyfvtstdufuu",
+      "seiscanLink": "https://www.seiscan.app/pacific-1/contracts/sei1w03wk9wpfah0mczgzlyf37ve98zdx9sl8wp254agfqzkh5gyfvtstdufuu",
+      "name": "Sei Pirates",
+      "symbol": "SEIPIRATES",
+      "decimals": 6,
+      "total_supply": "1000000000000000"
+    },
+    "token1Meta": {
+      "denom": "usei",
+      "seiscanLink": "https://www.seiscan.app/pacific-1/contracts/usei",
+      "name": "SEI",
+      "symbol": "SEI",
+      "decimals": 6,
+      "description": "sei",
+      "denom_units": [
+        {
+          "denom": "usei",
+          "exponent": 0,
+          "aliases": [
+            "microsei"
+          ]
+        },
+        {
+          "denom": "msei",
+          "exponent": 3,
+          "aliases": [
+            "millisei"
+          ]
+        },
+        {
+          "denom": "sei",
+          "exponent": 6,
+          "aliases": []
+        }
+      ],
+      "base": "usei",
+      "display": "sei"
+    },
+    "seiscanLink": "https://www.seiscan.app/pacific-1/contracts/sei1sz258j4ftrn7rc4y7fjxr2kzdrqamc4q9lnrwk7fyytrmsuav6tsjern24",
+    "astroportLink": "https://app.astroport.fi/swap?from=sei1w03wk9wpfah0mczgzlyf37ve98zdx9sl8wp254agfqzkh5gyfvtstdufuu&to=usei",
+    "coinhallLink": "https://coinhall.org/sei/sei1sz258j4ftrn7rc4y7fjxr2kzdrqamc4q9lnrwk7fyytrmsuav6tsjern24",
+    "asset_infos": [
+      {
+        "token": {
+          "contract_addr": "sei1w03wk9wpfah0mczgzlyf37ve98zdx9sl8wp254agfqzkh5gyfvtstdufuu"
+        }
+      },
+      {
+        "native_token": {
+          "denom": "usei"
+        }
+      }
+    ],
+    "contract_addr": "sei1sz258j4ftrn7rc4y7fjxr2kzdrqamc4q9lnrwk7fyytrmsuav6tsjern24",
+    "liquidity_token": "sei1s4t0am809rnj4qa3jnpk9dehh82mflf9n6e2k6qjt9t5cksp5yds5n4c3l",
+    "pair_type": {
+      "xyk": {}
+    },
+    "lpAdderAddress": "sei1agq0vyzn03q33hk3ez0vq3pfsf8uw3ys9gckl8",
+    "lpReceiverAddress": "sei1agq0vyzn03q33hk3ez0vq3pfsf8uw3ys9gckl8",
+    "liquidity": 0.0000014392026712942226,
+    "liquidityUpdate": "2024-01-09T15:25:02.501Z"
+  },
+  {
+    "token0Meta": {
+      "denom": "sei1w3sj03c8evff0hew88cdzc3ng9ra40ez8hsrf3xxaq57lxsf63hqfgwekx",
+      "seiscanLink": "https://www.seiscan.app/pacific-1/contracts/sei1w3sj03c8evff0hew88cdzc3ng9ra40ez8hsrf3xxaq57lxsf63hqfgwekx",
+      "name": "NewSeiruto",
+      "symbol": "NewSeiruto",
+      "decimals": 6,
+      "total_supply": "1000000000000000"
+    },
+    "token1Meta": {
+      "denom": "usei",
+      "seiscanLink": "https://www.seiscan.app/pacific-1/contracts/usei",
+      "name": "SEI",
+      "symbol": "SEI",
+      "decimals": 6,
+      "description": "sei",
+      "denom_units": [
+        {
+          "denom": "usei",
+          "exponent": 0,
+          "aliases": [
+            "microsei"
+          ]
+        },
+        {
+          "denom": "msei",
+          "exponent": 3,
+          "aliases": [
+            "millisei"
+          ]
+        },
+        {
+          "denom": "sei",
+          "exponent": 6,
+          "aliases": []
+        }
+      ],
+      "base": "usei",
+      "display": "sei"
+    },
+    "seiscanLink": "https://www.seiscan.app/pacific-1/contracts/sei1gvpds3usg33mf8yl250vtqxl5aakxmfn70sdu9kvpzqss5mmkrfslc5mrm",
+    "astroportLink": "https://app.astroport.fi/swap?from=sei1w3sj03c8evff0hew88cdzc3ng9ra40ez8hsrf3xxaq57lxsf63hqfgwekx&to=usei",
+    "coinhallLink": "https://coinhall.org/sei/sei1gvpds3usg33mf8yl250vtqxl5aakxmfn70sdu9kvpzqss5mmkrfslc5mrm",
+    "asset_infos": [
+      {
+        "token": {
+          "contract_addr": "sei1w3sj03c8evff0hew88cdzc3ng9ra40ez8hsrf3xxaq57lxsf63hqfgwekx"
+        }
+      },
+      {
+        "native_token": {
+          "denom": "usei"
+        }
+      }
+    ],
+    "contract_addr": "sei1gvpds3usg33mf8yl250vtqxl5aakxmfn70sdu9kvpzqss5mmkrfslc5mrm",
+    "liquidity_token": "sei1tpee8flr4mcxyyz6j7t0yw3sc7h0eh96qr60mygalx650q0qvcmq3gj90f",
+    "pair_type": {
+      "xyk": {}
+    },
+    "lpAdderAddress": "sei1hmwkn2znenju9y9mdk4z84f760p4txhd4fgpk6",
+    "lpReceiverAddress": "sei1hmwkn2znenju9y9mdk4z84f760p4txhd4fgpk6",
+    "liquidity": 0.000002823501938603994,
+    "liquidityUpdate": "2024-01-09T15:07:09.312Z"
+  },
+  {
+    "token0Meta": {
+      "denom": "usei",
+      "seiscanLink": "https://www.seiscan.app/pacific-1/contracts/usei",
+      "name": "SEI",
+      "symbol": "SEI",
+      "decimals": 6,
+      "description": "sei",
+      "denom_units": [
+        {
+          "denom": "usei",
+          "exponent": 0,
+          "aliases": [
+            "microsei"
+          ]
+        },
+        {
+          "denom": "msei",
+          "exponent": 3,
+          "aliases": [
+            "millisei"
+          ]
+        },
+        {
+          "denom": "sei",
+          "exponent": 6,
+          "aliases": []
+        }
+      ],
+      "base": "usei",
+      "display": "sei"
+    },
+    "token1Meta": {
+      "denom": "sei15yvmrchjk9kz9wrru3gwugkl9hjf870z6jjsx8wm2j7zvadrpupsy4kfzj",
+      "seiscanLink": "https://www.seiscan.app/pacific-1/contracts/sei15yvmrchjk9kz9wrru3gwugkl9hjf870z6jjsx8wm2j7zvadrpupsy4kfzj",
+      "name": "WojakSei",
+      "symbol": "Wojak",
+      "decimals": 6,
+      "total_supply": "1000000000000000"
+    },
+    "seiscanLink": "https://www.seiscan.app/pacific-1/contracts/sei1n9lad42tay2hak8j5h8yr0mwat62rmmcrtvsre5q50y0mru7pd5splg0yv",
+    "astroportLink": "https://app.astroport.fi/swap?from=usei&to=sei15yvmrchjk9kz9wrru3gwugkl9hjf870z6jjsx8wm2j7zvadrpupsy4kfzj",
+    "coinhallLink": "https://coinhall.org/sei/sei1n9lad42tay2hak8j5h8yr0mwat62rmmcrtvsre5q50y0mru7pd5splg0yv",
+    "asset_infos": [
+      {
+        "native_token": {
+          "denom": "usei"
+        }
+      },
+      {
+        "token": {
+          "contract_addr": "sei15yvmrchjk9kz9wrru3gwugkl9hjf870z6jjsx8wm2j7zvadrpupsy4kfzj"
+        }
+      }
+    ],
+    "contract_addr": "sei1n9lad42tay2hak8j5h8yr0mwat62rmmcrtvsre5q50y0mru7pd5splg0yv",
+    "liquidity_token": "sei1h5rj4y2cjcypjle9kjqc00vdx3zj3anqep8fj73phler4ppys80q6fg4e9",
+    "pair_type": {
+      "xyk": {}
+    },
+    "lpAdderAddress": "sei18tdw9n3dsactnd93ggc5agw3lnhz2mctjug3tn",
+    "lpReceiverAddress": "sei18tdw9n3dsactnd93ggc5agw3lnhz2mctjug3tn"
+  },
+  {
+    "token0Meta": {
+      "denom": "sei1u77jdwkhxch42v4yyywumnmqeudmmfsgj39vc8dc56f8z88dduuql98272",
+      "seiscanLink": "https://www.seiscan.app/pacific-1/contracts/sei1u77jdwkhxch42v4yyywumnmqeudmmfsgj39vc8dc56f8z88dduuql98272",
+      "name": "Sei Ducks",
+      "symbol": "SEIDUCK",
+      "decimals": 6,
+      "total_supply": "1000000000000000"
+    },
+    "token1Meta": {
+      "denom": "usei",
+      "seiscanLink": "https://www.seiscan.app/pacific-1/contracts/usei",
+      "name": "SEI",
+      "symbol": "SEI",
+      "decimals": 6,
+      "description": "sei",
+      "denom_units": [
+        {
+          "denom": "usei",
+          "exponent": 0,
+          "aliases": [
+            "microsei"
+          ]
+        },
+        {
+          "denom": "msei",
+          "exponent": 3,
+          "aliases": [
+            "millisei"
+          ]
+        },
+        {
+          "denom": "sei",
+          "exponent": 6,
+          "aliases": []
+        }
+      ],
+      "base": "usei",
+      "display": "sei"
+    },
+    "seiscanLink": "https://www.seiscan.app/pacific-1/contracts/sei1skasxpe6nhs5hw9v7g8890y0w5rd0ku39uxpkm9rqt690j5thj4smqhfsu",
+    "astroportLink": "https://app.astroport.fi/swap?from=sei1u77jdwkhxch42v4yyywumnmqeudmmfsgj39vc8dc56f8z88dduuql98272&to=usei",
+    "coinhallLink": "https://coinhall.org/sei/sei1skasxpe6nhs5hw9v7g8890y0w5rd0ku39uxpkm9rqt690j5thj4smqhfsu",
+    "asset_infos": [
+      {
+        "token": {
+          "contract_addr": "sei1u77jdwkhxch42v4yyywumnmqeudmmfsgj39vc8dc56f8z88dduuql98272"
+        }
+      },
+      {
+        "native_token": {
+          "denom": "usei"
+        }
+      }
+    ],
+    "contract_addr": "sei1skasxpe6nhs5hw9v7g8890y0w5rd0ku39uxpkm9rqt690j5thj4smqhfsu",
+    "liquidity_token": "sei1q82glsx0qslpk428x9kn7kaxevgykp5z0w0evplpx67jfcqm3m8st8l9su",
+    "pair_type": {
+      "xyk": {}
+    },
+    "lpAdderAddress": "sei1agq0vyzn03q33hk3ez0vq3pfsf8uw3ys9gckl8",
+    "lpReceiverAddress": "sei1agq0vyzn03q33hk3ez0vq3pfsf8uw3ys9gckl8",
+    "liquidity": 0.0000014335304008806687,
+    "liquidityUpdate": "2024-01-09T15:59:39.068Z"
+  },
+  {
+    "token0Meta": {
+      "denom": "sei1az597v9vkg2yh2t08c7c99ej75nq3t0aeqf5l5r2f7zxzqxs7dasw7vff3",
+      "seiscanLink": "https://www.seiscan.app/pacific-1/contracts/sei1az597v9vkg2yh2t08c7c99ej75nq3t0aeqf5l5r2f7zxzqxs7dasw7vff3",
+      "name": "SeiTrix",
+      "symbol": "SeiTrix",
+      "decimals": 6,
+      "total_supply": "1000000000000"
+    },
+    "token1Meta": {
+      "denom": "usei",
+      "seiscanLink": "https://www.seiscan.app/pacific-1/contracts/usei",
+      "name": "SEI",
+      "symbol": "SEI",
+      "decimals": 6,
+      "description": "sei",
+      "denom_units": [
+        {
+          "denom": "usei",
+          "exponent": 0,
+          "aliases": [
+            "microsei"
+          ]
+        },
+        {
+          "denom": "msei",
+          "exponent": 3,
+          "aliases": [
+            "millisei"
+          ]
+        },
+        {
+          "denom": "sei",
+          "exponent": 6,
+          "aliases": []
+        }
+      ],
+      "base": "usei",
+      "display": "sei"
+    },
+    "seiscanLink": "https://www.seiscan.app/pacific-1/contracts/sei1yp4avauzxvsjh22rgu92xtv9fz3uptfrlmandc063v8dpr8lcl7smvlnuc",
+    "astroportLink": "https://app.astroport.fi/swap?from=sei1az597v9vkg2yh2t08c7c99ej75nq3t0aeqf5l5r2f7zxzqxs7dasw7vff3&to=usei",
+    "coinhallLink": "https://coinhall.org/sei/sei1yp4avauzxvsjh22rgu92xtv9fz3uptfrlmandc063v8dpr8lcl7smvlnuc",
+    "asset_infos": [
+      {
+        "token": {
+          "contract_addr": "sei1az597v9vkg2yh2t08c7c99ej75nq3t0aeqf5l5r2f7zxzqxs7dasw7vff3"
+        }
+      },
+      {
+        "native_token": {
+          "denom": "usei"
+        }
+      }
+    ],
+    "contract_addr": "sei1yp4avauzxvsjh22rgu92xtv9fz3uptfrlmandc063v8dpr8lcl7smvlnuc",
+    "liquidity_token": "sei1ju0edfky65ekhtq9yjknpeknql0rysggd7jml33c0a8l58pcdljqydeg0n",
+    "pair_type": {
+      "xyk": {}
+    },
+    "liquidity": 0.0000014060897247324298,
+    "liquidityUpdate": "2024-01-09T16:58:19.315Z"
+  },
+  {
+    "token0Meta": {
+      "denom": "sei1jhmp3jqwh3g6kraq6fagf2ym0knjr7nza53tv5ha7pk7dqxgsvdqcle5ju",
+      "seiscanLink": "https://www.seiscan.app/pacific-1/contracts/sei1jhmp3jqwh3g6kraq6fagf2ym0knjr7nza53tv5ha7pk7dqxgsvdqcle5ju",
+      "name": "Sei Gogeta",
+      "symbol": "GOGETA",
+      "decimals": 6,
+      "total_supply": "1000000000000000"
+    },
+    "token1Meta": {
+      "denom": "usei",
+      "seiscanLink": "https://www.seiscan.app/pacific-1/contracts/usei",
+      "name": "SEI",
+      "symbol": "SEI",
+      "decimals": 6,
+      "description": "sei",
+      "denom_units": [
+        {
+          "denom": "usei",
+          "exponent": 0,
+          "aliases": [
+            "microsei"
+          ]
+        },
+        {
+          "denom": "msei",
+          "exponent": 3,
+          "aliases": [
+            "millisei"
+          ]
+        },
+        {
+          "denom": "sei",
+          "exponent": 6,
+          "aliases": []
+        }
+      ],
+      "base": "usei",
+      "display": "sei"
+    },
+    "seiscanLink": "https://www.seiscan.app/pacific-1/contracts/sei1ppqlpvx6tjm808w9kyay0rsly5fzte632hz8ll43f5vtxaxu3ddqeh0zxp",
+    "astroportLink": "https://app.astroport.fi/swap?from=sei1jhmp3jqwh3g6kraq6fagf2ym0knjr7nza53tv5ha7pk7dqxgsvdqcle5ju&to=usei",
+    "coinhallLink": "https://coinhall.org/sei/sei1ppqlpvx6tjm808w9kyay0rsly5fzte632hz8ll43f5vtxaxu3ddqeh0zxp",
+    "asset_infos": [
+      {
+        "token": {
+          "contract_addr": "sei1jhmp3jqwh3g6kraq6fagf2ym0knjr7nza53tv5ha7pk7dqxgsvdqcle5ju"
+        }
+      },
+      {
+        "native_token": {
+          "denom": "usei"
+        }
+      }
+    ],
+    "contract_addr": "sei1ppqlpvx6tjm808w9kyay0rsly5fzte632hz8ll43f5vtxaxu3ddqeh0zxp",
+    "liquidity_token": "sei18ac8g08xcx8tdxsg2jdu2ptlgv0r877jrp4whx6qzmn4suyfmtxqzffrec",
+    "pair_type": {
+      "xyk": {}
+    },
+    "liquidity": 140.05932861945757,
+    "liquidityUpdate": "2024-01-09T16:58:19.615Z"
+  },
+  {
+    "token0Meta": {
+      "denom": "sei1ppc0yuzyggpp2w4nnswjw0rvgcs7f97s7e267mmf3cg65067tczq3vf630",
+      "seiscanLink": "https://www.seiscan.app/pacific-1/contracts/sei1ppc0yuzyggpp2w4nnswjw0rvgcs7f97s7e267mmf3cg65067tczq3vf630",
+      "name": "ZenSei",
+      "symbol": "ZenSei",
+      "decimals": 6,
+      "total_supply": "100000000000000000"
+    },
+    "token1Meta": {
+      "denom": "usei",
+      "seiscanLink": "https://www.seiscan.app/pacific-1/contracts/usei",
+      "name": "SEI",
+      "symbol": "SEI",
+      "decimals": 6,
+      "description": "sei",
+      "denom_units": [
+        {
+          "denom": "usei",
+          "exponent": 0,
+          "aliases": [
+            "microsei"
+          ]
+        },
+        {
+          "denom": "msei",
+          "exponent": 3,
+          "aliases": [
+            "millisei"
+          ]
+        },
+        {
+          "denom": "sei",
+          "exponent": 6,
+          "aliases": []
+        }
+      ],
+      "base": "usei",
+      "display": "sei"
+    },
+    "seiscanLink": "https://www.seiscan.app/pacific-1/contracts/sei18mgc0latwmvx9dvq8dl7fqsf4y0lp0wfejct9mc38nt8gf757rhqlaahfa",
+    "astroportLink": "https://app.astroport.fi/swap?from=sei1ppc0yuzyggpp2w4nnswjw0rvgcs7f97s7e267mmf3cg65067tczq3vf630&to=usei",
+    "coinhallLink": "https://coinhall.org/sei/sei18mgc0latwmvx9dvq8dl7fqsf4y0lp0wfejct9mc38nt8gf757rhqlaahfa",
+    "asset_infos": [
+      {
+        "token": {
+          "contract_addr": "sei1ppc0yuzyggpp2w4nnswjw0rvgcs7f97s7e267mmf3cg65067tczq3vf630"
+        }
+      },
+      {
+        "native_token": {
+          "denom": "usei"
+        }
+      }
+    ],
+    "contract_addr": "sei18mgc0latwmvx9dvq8dl7fqsf4y0lp0wfejct9mc38nt8gf757rhqlaahfa",
+    "liquidity_token": "sei1vktuqngv75luu7v0t30mcs3rq77fmt0a39ew2zavgcrhp7x4qc5qytzsqw",
+    "pair_type": {
+      "xyk": {}
+    },
+    "lpAdderAddress": "sei1dm3y80cr3u8h95u6lz4w735wmwpvghq0u0aqku",
+    "lpReceiverAddress": "sei1dm3y80cr3u8h95u6lz4w735wmwpvghq0u0aqku",
+    "liquidity": 0.0000014250722303351368,
+    "liquidityUpdate": "2024-01-09T16:04:14.297Z"
+  },
+  {
+    "token0Meta": {
+      "denom": "usei",
+      "seiscanLink": "https://www.seiscan.app/pacific-1/contracts/usei",
+      "name": "SEI",
+      "symbol": "SEI",
+      "decimals": 6,
+      "description": "sei",
+      "denom_units": [
+        {
+          "denom": "usei",
+          "exponent": 0,
+          "aliases": [
+            "microsei"
+          ]
+        },
+        {
+          "denom": "msei",
+          "exponent": 3,
+          "aliases": [
+            "millisei"
+          ]
+        },
+        {
+          "denom": "sei",
+          "exponent": 6,
+          "aliases": []
+        }
+      ],
+      "base": "usei",
+      "display": "sei"
+    },
+    "token1Meta": {
+      "denom": "sei12v9u9ke8z4nj3ydcef35ecj4nthnpmpe05zua0tfrvjye8aprztqfara44",
+      "seiscanLink": "https://www.seiscan.app/pacific-1/contracts/sei12v9u9ke8z4nj3ydcef35ecj4nthnpmpe05zua0tfrvjye8aprztqfara44",
+      "name": "SEIBET",
+      "symbol": "SEIBET",
+      "decimals": 6,
+      "total_supply": "10000000000000000"
+    },
+    "seiscanLink": "https://www.seiscan.app/pacific-1/contracts/sei1d88g6gk44jgx5wfqwlsc3cnw383c55d5wp2s34av9ekssvd2s9uq7qtrzj",
+    "astroportLink": "https://app.astroport.fi/swap?from=usei&to=sei12v9u9ke8z4nj3ydcef35ecj4nthnpmpe05zua0tfrvjye8aprztqfara44",
+    "coinhallLink": "https://coinhall.org/sei/sei1d88g6gk44jgx5wfqwlsc3cnw383c55d5wp2s34av9ekssvd2s9uq7qtrzj",
+    "asset_infos": [
+      {
+        "native_token": {
+          "denom": "usei"
+        }
+      },
+      {
+        "token": {
+          "contract_addr": "sei12v9u9ke8z4nj3ydcef35ecj4nthnpmpe05zua0tfrvjye8aprztqfara44"
+        }
+      }
+    ],
+    "contract_addr": "sei1d88g6gk44jgx5wfqwlsc3cnw383c55d5wp2s34av9ekssvd2s9uq7qtrzj",
+    "liquidity_token": "sei17r207n893h7ds0fhc2trrqxd2s4mwhwj9cu32ptgx4w3lpmd5r8syx6g74",
+    "pair_type": {
+      "xyk": {}
+    },
+    "liquidity": 0.0000027908774413480798,
+    "liquidityUpdate": "2024-01-09T17:19:56.035Z"
+  },
+  {
+    "token0Meta": {
+      "denom": "sei1v9lyg39la4aq60tktgteljjzt28400uumgs3j039gqygd8kcfepqhns7az",
+      "seiscanLink": "https://www.seiscan.app/pacific-1/contracts/sei1v9lyg39la4aq60tktgteljjzt28400uumgs3j039gqygd8kcfepqhns7az",
+      "name": "JayAndJeff",
+      "symbol": "JAJ",
+      "decimals": 6,
+      "total_supply": "1000000000000000000"
+    },
+    "token1Meta": {
+      "denom": "usei",
+      "seiscanLink": "https://www.seiscan.app/pacific-1/contracts/usei",
+      "name": "SEI",
+      "symbol": "SEI",
+      "decimals": 6,
+      "description": "sei",
+      "denom_units": [
+        {
+          "denom": "usei",
+          "exponent": 0,
+          "aliases": [
+            "microsei"
+          ]
+        },
+        {
+          "denom": "msei",
+          "exponent": 3,
+          "aliases": [
+            "millisei"
+          ]
+        },
+        {
+          "denom": "sei",
+          "exponent": 6,
+          "aliases": []
+        }
+      ],
+      "base": "usei",
+      "display": "sei"
+    },
+    "seiscanLink": "https://www.seiscan.app/pacific-1/contracts/sei1cqsm3pp0req0dxwckp2kwfvcz0l9q5vln5gm0wckgjxp7tsnulxsqgw76y",
+    "astroportLink": "https://app.astroport.fi/swap?from=sei1v9lyg39la4aq60tktgteljjzt28400uumgs3j039gqygd8kcfepqhns7az&to=usei",
+    "coinhallLink": "https://coinhall.org/sei/sei1cqsm3pp0req0dxwckp2kwfvcz0l9q5vln5gm0wckgjxp7tsnulxsqgw76y",
+    "asset_infos": [
+      {
+        "token": {
+          "contract_addr": "sei1v9lyg39la4aq60tktgteljjzt28400uumgs3j039gqygd8kcfepqhns7az"
+        }
+      },
+      {
+        "native_token": {
+          "denom": "usei"
+        }
+      }
+    ],
+    "contract_addr": "sei1cqsm3pp0req0dxwckp2kwfvcz0l9q5vln5gm0wckgjxp7tsnulxsqgw76y",
+    "liquidity_token": "sei1ku7n5vqgpxtkkezjhdhk2ay5azzl8vac37ryt4m9mn6wywvxtp0q4d6082",
+    "pair_type": {
+      "xyk": {}
+    },
+    "lpAdderAddress": "sei1wmkpq9gszadmnk8pnrq0053h6exghm022uydyl",
+    "lpReceiverAddress": "sei1wmkpq9gszadmnk8pnrq0053h6exghm022uydyl"
+  },
+  {
+    "token0Meta": {
+      "denom": "sei13up4mjpn4syyuh4rd93uyt9zkhu8te9nc2k4rqge9tf63udw0qds2acn5v",
+      "seiscanLink": "https://www.seiscan.app/pacific-1/contracts/sei13up4mjpn4syyuh4rd93uyt9zkhu8te9nc2k4rqge9tf63udw0qds2acn5v",
+      "name": "KKK",
+      "symbol": "KKK",
+      "decimals": 6,
+      "total_supply": "777000000000000000"
+    },
+    "token1Meta": {
+      "denom": "usei",
+      "seiscanLink": "https://www.seiscan.app/pacific-1/contracts/usei",
+      "name": "SEI",
+      "symbol": "SEI",
+      "decimals": 6,
+      "description": "sei",
+      "denom_units": [
+        {
+          "denom": "usei",
+          "exponent": 0,
+          "aliases": [
+            "microsei"
+          ]
+        },
+        {
+          "denom": "msei",
+          "exponent": 3,
+          "aliases": [
+            "millisei"
+          ]
+        },
+        {
+          "denom": "sei",
+          "exponent": 6,
+          "aliases": []
+        }
+      ],
+      "base": "usei",
+      "display": "sei"
+    },
+    "seiscanLink": "https://www.seiscan.app/pacific-1/contracts/sei1unje2gu9k224pg36urm4kn0572fq4t2kvn634gq9m76txss7lz0s3fv89t",
+    "astroportLink": "https://app.astroport.fi/swap?from=sei13up4mjpn4syyuh4rd93uyt9zkhu8te9nc2k4rqge9tf63udw0qds2acn5v&to=usei",
+    "coinhallLink": "https://coinhall.org/sei/sei1unje2gu9k224pg36urm4kn0572fq4t2kvn634gq9m76txss7lz0s3fv89t",
+    "asset_infos": [
+      {
+        "token": {
+          "contract_addr": "sei13up4mjpn4syyuh4rd93uyt9zkhu8te9nc2k4rqge9tf63udw0qds2acn5v"
+        }
+      },
+      {
+        "native_token": {
+          "denom": "usei"
+        }
+      }
+    ],
+    "contract_addr": "sei1unje2gu9k224pg36urm4kn0572fq4t2kvn634gq9m76txss7lz0s3fv89t",
+    "liquidity_token": "sei1rnz7wdy8k0xuy8w0wvv6d7uzxfc0q3g83kfzw6rkps320m252zpsuz9kte",
+    "pair_type": {
+      "xyk": {}
+    },
+    "lpAdderAddress": "sei1fde0tm59wx40zmzv4703udfyp9ku9l9uvp2qp3",
+    "lpReceiverAddress": "sei1fde0tm59wx40zmzv4703udfyp9ku9l9uvp2qp3",
+    "liquidity": 0.0000014009214110371638,
+    "liquidityUpdate": "2024-01-09T17:04:45.983Z"
+  },
+  {
+    "token0Meta": {
+      "denom": "sei1aq6y9h35ae44f3m57288z8c42m3ltg0s8xwv6eg94f57nw25emcq450jdn",
+      "seiscanLink": "https://www.seiscan.app/pacific-1/contracts/sei1aq6y9h35ae44f3m57288z8c42m3ltg0s8xwv6eg94f57nw25emcq450jdn",
+      "name": "leaf",
+      "symbol": "LEAF",
+      "decimals": 6,
+      "total_supply": "1000000000000000"
+    },
+    "token1Meta": {
+      "denom": "usei",
+      "seiscanLink": "https://www.seiscan.app/pacific-1/contracts/usei",
+      "name": "SEI",
+      "symbol": "SEI",
+      "decimals": 6,
+      "description": "sei",
+      "denom_units": [
+        {
+          "denom": "usei",
+          "exponent": 0,
+          "aliases": [
+            "microsei"
+          ]
+        },
+        {
+          "denom": "msei",
+          "exponent": 3,
+          "aliases": [
+            "millisei"
+          ]
+        },
+        {
+          "denom": "sei",
+          "exponent": 6,
+          "aliases": []
+        }
+      ],
+      "base": "usei",
+      "display": "sei"
+    },
+    "seiscanLink": "https://www.seiscan.app/pacific-1/contracts/sei196x79gk5r6fn8su63lazjw6npn0tay8p6ylgjgz4nm0ztgkxt5dqmtal6v",
+    "astroportLink": "https://app.astroport.fi/swap?from=sei1aq6y9h35ae44f3m57288z8c42m3ltg0s8xwv6eg94f57nw25emcq450jdn&to=usei",
+    "coinhallLink": "https://coinhall.org/sei/sei196x79gk5r6fn8su63lazjw6npn0tay8p6ylgjgz4nm0ztgkxt5dqmtal6v",
+    "asset_infos": [
+      {
+        "token": {
+          "contract_addr": "sei1aq6y9h35ae44f3m57288z8c42m3ltg0s8xwv6eg94f57nw25emcq450jdn"
+        }
+      },
+      {
+        "native_token": {
+          "denom": "usei"
+        }
+      }
+    ],
+    "contract_addr": "sei196x79gk5r6fn8su63lazjw6npn0tay8p6ylgjgz4nm0ztgkxt5dqmtal6v",
+    "liquidity_token": "sei1apr8jy23mgksel6nnnt9say7u4px676ukn2re3nn0tytlu28rz8qa65xp9",
+    "pair_type": {
+      "xyk": {}
+    },
+    "lpAdderAddress": "sei1x5v8vv7l33tj788xugmnxx68mgtg5jcelc3u8u",
+    "lpReceiverAddress": "sei1x5v8vv7l33tj788xugmnxx68mgtg5jcelc3u8u"
+  },
+  {
+    "token0Meta": {
+      "denom": "factory/sei19tv3aknuwa7dpuelmmt3fzzwfv4tgs6ec6jqnt/messei",
+      "seiscanLink": "https://www.seiscan.app/pacific-1/contracts/factory/sei19tv3aknuwa7dpuelmmt3fzzwfv4tgs6ec6jqnt/messei",
+      "name": "messei",
+      "symbol": "messei",
+      "decimals": 6
+    },
+    "token1Meta": {
+      "denom": "usei",
+      "seiscanLink": "https://www.seiscan.app/pacific-1/contracts/usei",
+      "name": "SEI",
+      "symbol": "SEI",
+      "decimals": 6,
+      "description": "sei",
+      "denom_units": [
+        {
+          "denom": "usei",
+          "exponent": 0,
+          "aliases": [
+            "microsei"
+          ]
+        },
+        {
+          "denom": "msei",
+          "exponent": 3,
+          "aliases": [
+            "millisei"
+          ]
+        },
+        {
+          "denom": "sei",
+          "exponent": 6,
+          "aliases": []
+        }
+      ],
+      "base": "usei",
+      "display": "sei"
+    },
+    "seiscanLink": "https://www.seiscan.app/pacific-1/contracts/sei1wnl79yhs4yehuwq5qvhcn5xscds4772mvnacs08pz32y4uvcrdjq8l5uk8",
+    "astroportLink": "https://app.astroport.fi/swap?from=factory/sei19tv3aknuwa7dpuelmmt3fzzwfv4tgs6ec6jqnt/messei&to=usei",
+    "coinhallLink": "https://coinhall.org/sei/sei1wnl79yhs4yehuwq5qvhcn5xscds4772mvnacs08pz32y4uvcrdjq8l5uk8",
+    "asset_infos": [
+      {
+        "native_token": {
+          "denom": "factory/sei19tv3aknuwa7dpuelmmt3fzzwfv4tgs6ec6jqnt/messei"
+        }
+      },
+      {
+        "native_token": {
+          "denom": "usei"
+        }
+      }
+    ],
+    "contract_addr": "sei1wnl79yhs4yehuwq5qvhcn5xscds4772mvnacs08pz32y4uvcrdjq8l5uk8",
+    "liquidity_token": "sei1yzm4yw42fgjkw9ur7qg4aqazef0hhckrvc7ycfk58rx4fv8k7g0qff57sj",
+    "pair_type": {
+      "xyk": {}
+    },
+    "lpReceiverAddress": "sei19tv3aknuwa7dpuelmmt3fzzwfv4tgs6ec6jqnt",
+    "liquidity": 0.000054282205322452,
+    "liquidityUpdate": "2024-01-09T18:08:24.664Z"
+  },
+  {
+    "token0Meta": {
+      "denom": "sei1mgwq9mp6vjgx9psvrel7ymc8y3dmlucw9rax8tcr9y88c0sk7dkqedns3e",
+      "seiscanLink": "https://www.seiscan.app/pacific-1/contracts/sei1mgwq9mp6vjgx9psvrel7ymc8y3dmlucw9rax8tcr9y88c0sk7dkqedns3e",
+      "name": "BPoPo",
+      "symbol": "BPoPo",
+      "decimals": 6,
+      "total_supply": "100000000000000000"
+    },
+    "token1Meta": {
+      "denom": "usei",
+      "seiscanLink": "https://www.seiscan.app/pacific-1/contracts/usei",
+      "name": "SEI",
+      "symbol": "SEI",
+      "decimals": 6,
+      "description": "sei",
+      "denom_units": [
+        {
+          "denom": "usei",
+          "exponent": 0,
+          "aliases": [
+            "microsei"
+          ]
+        },
+        {
+          "denom": "msei",
+          "exponent": 3,
+          "aliases": [
+            "millisei"
+          ]
+        },
+        {
+          "denom": "sei",
+          "exponent": 6,
+          "aliases": []
+        }
+      ],
+      "base": "usei",
+      "display": "sei"
+    },
+    "seiscanLink": "https://www.seiscan.app/pacific-1/contracts/sei13zur6nwf0yp35nn9rwtac3rrw4ufdvk22kq5xc8chxq7eaqf7a2qxl5hpr",
+    "astroportLink": "https://app.astroport.fi/swap?from=sei1mgwq9mp6vjgx9psvrel7ymc8y3dmlucw9rax8tcr9y88c0sk7dkqedns3e&to=usei",
+    "coinhallLink": "https://coinhall.org/sei/sei13zur6nwf0yp35nn9rwtac3rrw4ufdvk22kq5xc8chxq7eaqf7a2qxl5hpr",
+    "asset_infos": [
+      {
+        "token": {
+          "contract_addr": "sei1mgwq9mp6vjgx9psvrel7ymc8y3dmlucw9rax8tcr9y88c0sk7dkqedns3e"
+        }
+      },
+      {
+        "native_token": {
+          "denom": "usei"
+        }
+      }
+    ],
+    "contract_addr": "sei13zur6nwf0yp35nn9rwtac3rrw4ufdvk22kq5xc8chxq7eaqf7a2qxl5hpr",
+    "liquidity_token": "sei18dj7s35zyys0ryj68w2yx9l6e7vwll3ch6uwjj5tv0exzncf936s7jtx04",
+    "pair_type": {
+      "xyk": {}
+    },
+    "lpAdderAddress": "sei1q4jqz7yqnl7xk9dt7y7jj37te52a4edp9w6760",
+    "lpReceiverAddress": "sei1q4jqz7yqnl7xk9dt7y7jj37te52a4edp9w6760",
+    "liquidity": 0.000001395738685708984,
+    "liquidityUpdate": "2024-01-09T18:44:25.855Z"
+  },
+  {
+    "token0Meta": {
+      "denom": "sei1ndt24t9qlx9c36lrla5k95hxuwv7a037zgu8vhr374hkaj5w0jxq5du5w2",
+      "seiscanLink": "https://www.seiscan.app/pacific-1/contracts/sei1ndt24t9qlx9c36lrla5k95hxuwv7a037zgu8vhr374hkaj5w0jxq5du5w2",
+      "name": "Seirberus",
+      "symbol": "Seirberus",
+      "decimals": 6,
+      "total_supply": "1000000000000"
+    },
+    "token1Meta": {
+      "denom": "usei",
+      "seiscanLink": "https://www.seiscan.app/pacific-1/contracts/usei",
+      "name": "SEI",
+      "symbol": "SEI",
+      "decimals": 6,
+      "description": "sei",
+      "denom_units": [
+        {
+          "denom": "usei",
+          "exponent": 0,
+          "aliases": [
+            "microsei"
+          ]
+        },
+        {
+          "denom": "msei",
+          "exponent": 3,
+          "aliases": [
+            "millisei"
+          ]
+        },
+        {
+          "denom": "sei",
+          "exponent": 6,
+          "aliases": []
+        }
+      ],
+      "base": "usei",
+      "display": "sei"
+    },
+    "seiscanLink": "https://www.seiscan.app/pacific-1/contracts/sei1xy57az3272t4v4y6k03wzkq49ts7hx09ra6kt9ecyh3jf2c8s72q7pw9u4",
+    "astroportLink": "https://app.astroport.fi/swap?from=sei1ndt24t9qlx9c36lrla5k95hxuwv7a037zgu8vhr374hkaj5w0jxq5du5w2&to=usei",
+    "coinhallLink": "https://coinhall.org/sei/sei1xy57az3272t4v4y6k03wzkq49ts7hx09ra6kt9ecyh3jf2c8s72q7pw9u4",
+    "asset_infos": [
+      {
+        "token": {
+          "contract_addr": "sei1ndt24t9qlx9c36lrla5k95hxuwv7a037zgu8vhr374hkaj5w0jxq5du5w2"
+        }
+      },
+      {
+        "native_token": {
+          "denom": "usei"
+        }
+      }
+    ],
+    "contract_addr": "sei1xy57az3272t4v4y6k03wzkq49ts7hx09ra6kt9ecyh3jf2c8s72q7pw9u4",
+    "liquidity_token": "sei1p6y7xg5c4nyjma6lhzcauvysf3xgpj3jepptqdmravaugh89wpgqsg9djz",
+    "pair_type": {
+      "xyk": {}
+    },
+    "lpAdderAddress": "sei1cglt0pauxg5006t3p56aywf0dzfh5whs7wp9ll",
+    "lpReceiverAddress": "sei1cglt0pauxg5006t3p56aywf0dzfh5whs7wp9ll"
+  },
+  {
+    "token0Meta": {
+      "denom": "sei1fp0j7ayahcu3uk3rk3wmetgxxx9fenyw2rvrzugzzmvfyze2hg0qsh2gmf",
+      "seiscanLink": "https://www.seiscan.app/pacific-1/contracts/sei1fp0j7ayahcu3uk3rk3wmetgxxx9fenyw2rvrzugzzmvfyze2hg0qsh2gmf",
+      "name": "SeiOctopus",
+      "symbol": "SeiOctopus",
+      "decimals": 6,
+      "total_supply": "100000000000000000"
+    },
+    "token1Meta": {
+      "denom": "usei",
+      "seiscanLink": "https://www.seiscan.app/pacific-1/contracts/usei",
+      "name": "SEI",
+      "symbol": "SEI",
+      "decimals": 6,
+      "description": "sei",
+      "denom_units": [
+        {
+          "denom": "usei",
+          "exponent": 0,
+          "aliases": [
+            "microsei"
+          ]
+        },
+        {
+          "denom": "msei",
+          "exponent": 3,
+          "aliases": [
+            "millisei"
+          ]
+        },
+        {
+          "denom": "sei",
+          "exponent": 6,
+          "aliases": []
+        }
+      ],
+      "base": "usei",
+      "display": "sei"
+    },
+    "seiscanLink": "https://www.seiscan.app/pacific-1/contracts/sei17ts7rr0e7lg6ye3uue5pxm4ayuzpm3z6658lz6kmznpnsrp4tmyq924svp",
+    "astroportLink": "https://app.astroport.fi/swap?from=sei1fp0j7ayahcu3uk3rk3wmetgxxx9fenyw2rvrzugzzmvfyze2hg0qsh2gmf&to=usei",
+    "coinhallLink": "https://coinhall.org/sei/sei17ts7rr0e7lg6ye3uue5pxm4ayuzpm3z6658lz6kmznpnsrp4tmyq924svp",
+    "asset_infos": [
+      {
+        "token": {
+          "contract_addr": "sei1fp0j7ayahcu3uk3rk3wmetgxxx9fenyw2rvrzugzzmvfyze2hg0qsh2gmf"
+        }
+      },
+      {
+        "native_token": {
+          "denom": "usei"
+        }
+      }
+    ],
+    "contract_addr": "sei17ts7rr0e7lg6ye3uue5pxm4ayuzpm3z6658lz6kmznpnsrp4tmyq924svp",
+    "liquidity_token": "sei1yxtwjlzqtwezvlvjn2lknmss20n7yv52qrrrmemmms4tu734wyvsjyf9pf",
+    "pair_type": {
+      "xyk": {}
+    },
+    "liquidity": 0.0000013698019773086606,
+    "liquidityUpdate": "2024-01-09T19:39:32.873Z"
   }
 ]
