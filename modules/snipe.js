@@ -8,6 +8,7 @@ const { Client, GatewayIntentBits, ActivityType } = require('discord.js');
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const moment = require('moment');
 const fs = require('fs/promises');
+const path = require('path')
 const TransactionManager = require("./transactions")
 var colors = require("colors");
 colors.enable();
@@ -28,11 +29,10 @@ class SeiSniper {
         this.tokenTypes = config.tokenTypes
 
         this.monitorNewPairs = false
+        this.monitorRugs = false
 
         this.baseAssetName = "SEI"
         this.baseDenom = "usei"
-        this.baseAsset = null
-        this.stableAsset = null
         this.baseAssetPrice = 0;
 
         this.tokenTypes = ['native', 'tokenFactory'];
@@ -47,59 +47,25 @@ class SeiSniper {
         this.stopLoss = config.stopLoss
         this.maxSpread = config.maxSpread
         this.tradeTimeLimit = config.tradeTimeLimit
-        this.positions = new Map()
 
+        this.positions = new Map()
         this.allPairs = new Map();
         this.ignoredPairs = new Set();
+        this.ruggedPairs = new Set();
 
         this.pairPriceMonitoringIntervals = new Map();
-        this.lowLiquidityPairMonitoringIntervals = new Map();
         this.sellPairPriceMonitoringIntervals = new Map();
         this.lastPrices = new Map();
-
-        this.lowLiqPairsToMonitor = new Set()
-
-        this.monitoringNewPairIntervalId = null;
         this.monitoringBasePairIntervalId = null;
 
         this.discordToken = process.env.DISCORD_TOKEN;
         this.discordChannelId = process.env.DISCORD_CHANNEL;
-
         this.discordClient = new Client({ intents: [GatewayIntentBits.Guilds] });
-        this.discordClient.login(this.discordToken);
-
+        this.discordMessagesEnabled = config.discordMessagesEnabled
         this.discordTag = `<@352761566401265664>`
-        this.discordClient.on('ready', () => {
-            console.log(`Logged in as ${this.discordClient.user.tag}!`.gray);
-            this.discordClient.guilds.cache.forEach(guild => {
-                guild.commands.create(new SlashCommandBuilder()
-                    .setName('get_positions')
-                    .setDescription('Get portfolio positions for a wallet address')
-                );
-                guild.commands.create(new SlashCommandBuilder()
-                    .setName('buy_token')
-                    .addStringOption(option => option.setName('pair').setDescription('The pair to buy').setRequired(true))
-                    .addNumberOption(option => option.setName('amount').setDescription('The amount to buy').setRequired(true))
-                    .setDescription('Buy a token using the pair address')
-                );
-                guild.commands.create(new SlashCommandBuilder()
-                    .setName('sell_token')
-                    .addStringOption(option => option.setName('pair').setDescription('The pair to sell').setRequired(true))
-                    .setDescription('Sell a token using the pair address')
-                );
-                guild.commands.create(new SlashCommandBuilder()
-                    .setName('monitor_to_sell')
-                    .addStringOption(option => option.setName('pair').setDescription('The pair to monitor').setRequired(true))
-                    .setDescription('Monitor a pair for opportunity to sell')
-                );
-            });
-            console.log("set up discord slash commands".gray)
-        });
-
     }
 
     async initialize() {
-
         try {
             this.wallet = await restoreWallet(process.env.MNEMONIC);
             this.signingCosmWasmClient = await getSigningCosmWasmClient(this.rpc, this.wallet);
@@ -119,12 +85,47 @@ class SeiSniper {
             console.log(`Init on RPC: ${this.rpc} | REST: ${this.rest}`.bgGreen)
 
             try {
-                await this.loadFromFile('data.json');
+                await this.loadFromFile();
                 await this.updateBaseAssetPrice()
                 this.setupDiscordCommands()
             } catch (error) {
                 console.error('Error during initialization:', error);
             }
+
+            this.discordClient.on('ready', async () => {
+                console.log(`Logged in as ${this.discordClient.user.tag}!`.gray);
+                await this.sendMessageToDiscord(
+                    `:arrows_clockwise: Start up Sei Sniper on RPC: ${this.rpc} | REST: ${this.rest}\n` +
+                    `:chart_with_upwards_trend: Trading mode: ${this.live ? ':exclamation: LIVE :exclamation:' : 'TEST'}\n` +
+                    `:gun: Snipe amount: ${this.snipeAmount} ${this.baseAssetName} ($${(this.baseAssetPrice * this.snipeAmount).toFixed(2)})` +
+                    ` targeting pairs between $${this.lowLiquidityThreshold} and $${this.highLiquidityThreshold} in liquidity`
+                )
+                this.discordClient.guilds.cache.forEach(guild => {
+                    guild.commands.create(new SlashCommandBuilder()
+                        .setName('get_positions')
+                        .setDescription('Get portfolio positions for a wallet address')
+                    );
+                    guild.commands.create(new SlashCommandBuilder()
+                        .setName('buy_token')
+                        .addStringOption(option => option.setName('pair').setDescription('The pair to buy').setRequired(true))
+                        .addNumberOption(option => option.setName('amount').setDescription('The amount to buy').setRequired(true))
+                        .setDescription('Buy a token using the pair address')
+                    );
+                    guild.commands.create(new SlashCommandBuilder()
+                        .setName('sell_token')
+                        .addStringOption(option => option.setName('pair').setDescription('The pair to sell').setRequired(true))
+                        .setDescription('Sell a token using the pair address')
+                    );
+                    guild.commands.create(new SlashCommandBuilder()
+                        .setName('monitor_to_sell')
+                        .addStringOption(option => option.setName('pair').setDescription('The pair to monitor').setRequired(true))
+                        .setDescription('Monitor a pair for opportunity to sell')
+                    );
+                });
+                console.log("set up discord slash commands".gray)
+            });
+
+            await this.discordClient.login(this.discordToken);
 
         } catch (error) {
             console.error('Error during initialization:', error);
@@ -146,6 +147,7 @@ class SeiSniper {
             })
             balance = balance.amount
         }
+        if (!balance) return 0
         return balance
     }
 
@@ -155,7 +157,14 @@ class SeiSniper {
             const { commandName } = interaction;
             if (commandName === 'get_positions') {
                 await interaction.reply("Fetching wallet holdings...");
-                await this.executeGetPositionsCommand();
+                if (this.positions.size > 5) {
+                    this.setMonitorNewPairs(false)
+                    await this.executeGetPositionsCommand();
+                    this.setMonitorNewPairs(true)
+                }
+                else {
+                    await this.executeGetPositionsCommand();
+                }
             }
             if (commandName === 'buy_token') {
                 await interaction.reply("Buying token");
@@ -218,6 +227,9 @@ class SeiSniper {
                 ? pair.token1Meta
                 : pair.token0Meta;
             let balance = await this.getBalanceOfToken(memeTokenMeta.denom);
+            if (!balance) {
+                balance = this.positions.get(pairContract).balance
+            }
             if (balance && Number(balance) > 0) {
                 let result = await this.sellMemeToken(pair, balance)
                 if (result && !this.allPairs.has(pairContract)) {
@@ -245,37 +257,57 @@ class SeiSniper {
         }
     }
 
-    async loadFromFile(filename) {
+    async loadFromFile() {
         try {
-            const data = await fs.readFile(filename, 'utf-8');
-            const jsonData = JSON.parse(data);
-            if (jsonData.allPairs) {
-                this.allPairs = new Map(jsonData.allPairs.map(pair => [pair.contract_addr, pair]));
-                console.log('Loaded allPairs from file'.gray);
-            }
-            if (jsonData.positions) {
-                this.positions = new Map(jsonData.positions.map(position => [position.pair_contract, position]));
-                console.log('Loaded positions from file'.gray);
-            }
-            if (jsonData.ignoredPairs) {
-                this.ignoredPairs = new Set(jsonData.ignoredPairs);
-                console.log('Loaded ignoredPairs from file'.gray);
-            }
+            this.allPairs = await this.loadMapFromFile('allPairs.json', 'contract_addr');
+            this.positions = await this.loadMapFromFile('positions.json', 'pair_contract');
+            this.ignoredPairs = await this.loadSetFromFile('ignoredPairs.json');
+            this.ruggedPairs = await this.loadSetFromFile('ruggedPairs.json');
+
+            console.log('Loaded data from files'.gray);
         } catch (error) {
-            console.error('Error loading data from file:', error);
+            console.error('Error loading data from files:', error);
         }
     }
 
-    async saveToFile(filename) {
+    async loadMapFromFile(filename, keyProperty) {
+        const pairs = await this.readDataFromFile(filename);
+        return new Map(pairs.map(item => [item[keyProperty], item]));
+    }
+
+    async loadSetFromFile(filename) {
+        const items = await this.readDataFromFile(filename);
+        return new Set(items);
+    }
+
+    async saveToFile() {
         try {
-            const dataToSave = {
-                allPairs: Array.from(this.allPairs.values()),
-                positions: Array.from(this.positions.values()),
-                ignoredPairs: Array.from(this.ignoredPairs),
-            };
-            await fs.writeFile(filename, JSON.stringify(dataToSave, null, 2), 'utf-8');
+            await this.saveDataToFile('allPairs.json', Array.from(this.allPairs.values()));
+            await this.saveDataToFile('positions.json', Array.from(this.positions.values()));
+            await this.saveDataToFile('ignoredPairs.json', Array.from(this.ignoredPairs));
+            await this.saveDataToFile('ruggedPairs.json', Array.from(this.ruggedPairs));
         } catch (error) {
-            console.error('Error saving data to file:', error);
+            console.error('Error saving data to files:', error);
+        }
+    }
+
+    async readDataFromFile(filename) {
+        const filePath = path.resolve(__dirname, '..', 'data', filename);
+        try {
+            const data = await fs.readFile(filePath, 'utf-8');
+            return JSON.parse(data);
+        } catch (error) {
+            return filename === 'positions.json' || filename === 'allPairs.json' ? new Map() : new Set();
+        }
+    }
+
+    async saveDataToFile(filename, data) {
+        const filePath = path.resolve(__dirname, '..', 'data', filename);
+
+        try {
+            await fs.writeFile(filePath, JSON.stringify(data, null, 2), 'utf-8');
+        } catch (error) {
+            console.error(`Error saving ${filename} to file:`, error);
         }
     }
 
@@ -288,6 +320,10 @@ class SeiSniper {
         const channel = this.discordClient.channels.cache.get(this.discordChannelId);
         if (!channel) {
             console.error('Discord channel not found.');
+            return;
+        }
+
+        if (!this.discordMessagesEnabled) {
             return;
         }
 
@@ -308,7 +344,7 @@ class SeiSniper {
                 const activityText = `${this.baseAssetName}: $${this.baseAssetPrice.toFixed(3)}`;
                 this.discordClient.user.setActivity(activityText, { type: ActivityType.Watching });
             }
-            await this.saveToFile('data.json')
+            await this.saveToFile()
         }
         catch (error) {
             console.error(`Error when updating base asset price`, error.message || error)
@@ -332,7 +368,7 @@ class SeiSniper {
             const token = await this.cosmWasmClient.queryContractSmart(denom, { token_info: {} })
             return token;
         } catch (error) {
-            console.error('Error fetching token info:', error.message || error);
+            console.error('Error fetching token info:', denom, error.message || error);
             return {}
         }
     }
@@ -342,6 +378,20 @@ class SeiSniper {
             const token = await this.queryClient.cosmos.bank.v1beta1.denomMetadata({ denom })
             return token;
         } catch (error) {
+            return { metadata: { name: '', symbol: '' } }
+        }
+    }
+
+    async getTokenFactoryMetaData(denom) {
+        console.log("get token factory metadata")
+        try {
+            const token = await this.queryClient.seiprotocol.seichain.tokenfactory.denomAuthorityMetadata({
+                denom: denom
+            })
+            console.log(token)
+            return token;
+        } catch (error) {
+            console.log(error)
             return { metadata: { name: '', symbol: '' } }
         }
     }
@@ -643,18 +693,35 @@ class SeiSniper {
 
             console.log(`Monitoring stopped for ${pairName}.`.bgYellow);
         } else {
-            console.log(`Pair ${pairName} is not being monitored.`);
+            console.log(`Pair ${pairName} is not being monitored.`.gray);
         }
     }
 
     async getPortfolio() {
-        console.log("fetching portfolio")
+        console.log("fetching portfolio".bgCyan)
         try {
-
-            return await this.queryClient.cosmos.bank.v1beta1.allBalances({
+            let balances = await this.queryClient.cosmos.bank.v1beta1.allBalances({
                 address: this.publicKey
             })
+            for (const position of this.positions.values()) {
+                let denom = position.token_denom;
 
+                let balance = await this.getBalanceOfToken(denom);
+                let pair = this.allPairs.get(position.pair_contract)
+
+                await this.calculateLiquidity(pair)
+                if (pair.liquidity < 2 || balance == 0) {
+                    this.positions.delete(pair.contract_addr)
+                }
+
+                if (pair.liquidity > 2 && !balances.balances.find(b => b.denom === denom)) {
+                    balances.balances.push({
+                        denom: denom,
+                        amount: balance
+                    });
+                }
+            }
+            return balances
         } catch (error) {
             console.error('Error fetching account portfolio:', error);
         }
@@ -669,7 +736,7 @@ class SeiSniper {
                 this.ignoredPairs.add(pair.contract_addr)
             }
         }
-        await this.saveToFile('data.json')
+        await this.saveToFile()
     }
 
     async buyMemeToken(pair, amount, retries = 5) {
@@ -775,7 +842,7 @@ class SeiSniper {
 
         this.sendMessageToDiscord(`:gun: Sniped token ${memeTokenMeta.symbol}! ` +
             `Balance: ${(updatedBalance / 10 ** memeTokenMeta.decimals).toFixed(3)} ` +
-            `<@352761566401265664>\n${pair.coinhallLink}`);
+            `${this.discordTag}\n${pair.coinhallLink}`);
     }
 
     async sellMemeToken(pair, amount = null, maxRetries = 3) {
@@ -792,6 +859,8 @@ class SeiSniper {
         const memeTokenMeta = pair.token0Meta.denom === this.baseDenom
             ? pair.token1Meta
             : pair.token0Meta;
+
+        console.log(`Attempting to sell token ${memeTokenMeta.symbol}`)
 
         const assetToSell = pair.asset_infos.findIndex(assetInfo => {
             const isNativeToken = assetInfo.native_token && assetInfo.native_token.denom !== this.baseDenom;
@@ -840,6 +909,10 @@ class SeiSniper {
                 contractAddress: pair.contract_addr,
                 sender: this.publicKey,
                 msg: swapOperations,
+                funds: [{
+                    denom: memeTokenMeta.denom,
+                    amount: amount.toString(),
+                }],
             };
 
             // is cw20
@@ -867,6 +940,7 @@ class SeiSniper {
             }
 
             try {
+                console.log(`Attempting sell with spread: ${spread.toString()}`)
                 let result = await this.txManager.enqueue(msg);
 
                 if (!result) {
@@ -916,7 +990,7 @@ class SeiSniper {
                     this.sendMessageToDiscord(
                         `${profit > 0 ? ':dollar:' : ':small_red_triangle_down:'} ` +
                         `Sold token ${memeTokenMeta.symbol} for ${returnAmountAdjusted.toFixed(4)} ${this.baseAssetName}. ` +
-                        `PnL: ${profit > 0 ? '+' : ''}${profit.toFixed(4)} ${this.baseAssetName} ($${usdValue.toFixed(2)}) <@352761566401265664>\n${pair.coinhallLink}`
+                        `PnL: ${profit > 0 ? '+' : ''}${profit.toFixed(4)} ${this.baseAssetName} ($${usdValue.toFixed(2)}) ${this.discordTag}\n${pair.coinhallLink}`
                     );
                     return result;
                 }
@@ -933,14 +1007,13 @@ class SeiSniper {
     }
 
     async formatPortfolioMessage(portfolio) {
-        console.log(portfolio)
         let formattedMessage = '';
 
         for (const balance of portfolio.balances) {
-            if (balance.amount <= 0) continue;
+            if (Number(balance.amount) <= 0 || !balance.amount) continue;
             if (balance.denom === this.baseDenom) {
                 let usdValue = this.baseAssetPrice * (balance.amount / Math.pow(10, 6))
-                formattedMessage += `${this.baseAssetName}: ${(balance.amount / Math.pow(10, 6)).toFixed(2)} ($${usdValue.toFixed(2)})`
+                formattedMessage += `${this.baseAssetName}: ${(balance.amount / Math.pow(10, 6)).toFixed(2)} :dollar: $${usdValue.toFixed(2)}\n`
                 continue
             }
 
@@ -952,8 +1025,7 @@ class SeiSniper {
             });
 
             if (pair) {
-                const pairName = `${pair.token0Meta.symbol}, ${pair.token1Meta.symbol}`;
-                const tokenDenom = pair.asset_infos[0].native_token.denom === balance.denom
+                const tokenDenom = pair.token0Meta.denom !== this.baseDenom
                     ? pair.token0Meta
                     : pair.token1Meta;
 
@@ -966,9 +1038,10 @@ class SeiSniper {
 
                     const usdValue = (convertedQuote * baseAssetPriceConverted)
 
-                    if (usdValue > 0.1) {
-                        formattedMessage += `${pairName}: ${(balance.amount / Math.pow(10, tokenDenom.decimals)).toFixed(2)} ` +
-                            `${tokenDenom.symbol} (${amountBack} ${this.baseAssetName} $${usdValue.toFixed(2)})\n${pair.coinhallLink}\n`;
+                    if (usdValue.toFixed(2) > 0) {
+                        formattedMessage += `${(balance.amount / Math.pow(10, tokenDenom.decimals)).toFixed(2)} ` +
+                            `${tokenDenom.symbol} (${amountBack} ${this.baseAssetName} :dollar: $${usdValue.toFixed(2)}) ` +
+                            `liquidity: $${pair.liquidity.toFixed(2)} ${pair.contract_addr}\n`;
                     }
                 }
             }
@@ -1004,6 +1077,7 @@ class SeiSniper {
                 let currentTime = moment()
                 if (currentTime > moment(position.time_bought).add(this.tradeTimeLimit, 'minute')) {
                     console.log(`trade time limit reached (${this.tradeTimeLimit} minutes)`)
+                    await this.sendMessageToDiscord(`trade time limit reached for ${pairName} (${this.tradeTimeLimit} minutes)`)
                     this.stopMonitoringPairToSell(pair)
                     let balance = await this.getBalanceOfToken(tokenDenom.denom);
                     result = await this.sellMemeToken(pair, balance)
@@ -1038,6 +1112,7 @@ class SeiSniper {
 
                     if (percentageIncrease <= this.stopLoss * -1 && quote.amount < amountIn) {
                         console.log(`stop loss hit for ${tokenDenom.symbol} ${percentageIncrease}%`.bgRed)
+                        await this.sendMessageToDiscord(`stop loss hit for ${tokenDenom.symbol} ${percentageIncrease.toFixed(2)}% ${this.discordTag}`)
                         this.stopMonitoringPairToSell(pair)
 
                         let liquidity = await this.calculateLiquidity(pair)
@@ -1047,7 +1122,7 @@ class SeiSniper {
                         return
                     }
                     if (percentageIncrease >= this.profitGoalPercent && quote.amount > amountIn) {
-                        console.log(`profit goal reached for ${tokenDenom.symbol} ${percentageIncrease}%`)
+                        console.log(`profit goal reached for ${tokenDenom.symbol} ${percentageIncrease.toFixed(2)}%`)
                         this.stopMonitoringPairToSell(pair)
                         if (percentageIncrease >= this.profitGoalPercent * 2) {
                             result = await this.sellMemeToken(pair, Number(position.balance) * 0.6)
@@ -1079,7 +1154,7 @@ class SeiSniper {
 
             console.log(`Monitoring to sell stopped for ${pairName}.`.bgCyan);
         } else {
-            console.log(`Pair ${pairName} is not being monitored.`);
+            console.log(`Pair ${pairName} is not being monitored.`.gray);
         }
     }
 
@@ -1116,176 +1191,309 @@ class SeiSniper {
         }
     }
 
-    async checkFactoryForNewPairs() {
+    async checkForProvideLiquidity(pages = 1) {
         try {
             const startTime = new Date().getTime();
 
-            const transactions = await this.queryClient.cosmos.tx.v1beta1.getTxsEvent({
-                events: `wasm.action='create_pair'`,
-                orderBy: 2,
-                pagination: 0
-            });
+            for (let i = 0; i < pages; i++) {
+                const transactions = await this.queryClient.cosmos.tx.v1beta1.getTxsEvent({
+                    events: `wasm.action='provide_liquidity'`,
+                    orderBy: 2,
+                    pagination: i
+                });
 
-            for (const txResponse of transactions.tx_responses) {
-                const txTime = moment(txResponse['timestamp'], 'YYYY-MM-DD HH:mm:ss.SSS Z');
+                for (const txResponse of transactions.tx_responses) {
+                    const txTime = moment(txResponse['timestamp'], 'YYYY-MM-DD HH:mm:ss.SSS Z');
+                    let json = JSON.parse(txResponse.raw_log)
 
-                let json = JSON.parse(txResponse.raw_log)
-                for (const i in json) {
-                    let event = json[i].events.find(x => x.type == "wasm")
-                    let pairAddress = event.attributes.find(x => x.key == "pair_contract_addr").value
-                    let creatorAddress = event.attributes.find(x => x.key == "_contract_address").value
+                    for (const j in json) {
+                        let event = json[j].events.find(x => x.type == "wasm")
+                        if (!event || !event.attributes) continue
+                        let isProvideLiquidity = event.attributes.find(x => x.key == "action" && x.value == "provide_liquidity")
+                        if (!isProvideLiquidity) continue
 
-                    if (!this.allPairs.has(pairAddress) && !this.ignoredPairs.has(pairAddress)) {
-                        let pairInfo = await this.getPairInfo(pairAddress);
+                        let assetValues = event.attributes.find(x => x.key === "assets").value.split(',');
 
-                        if (
-                            pairInfo &&
-                            pairInfo.token0Meta &&
-                            pairInfo.token1Meta &&
-                            this.pairType === JSON.stringify(pairInfo.pair_type) &&
-                            (pairInfo.token0Meta.denom === this.baseDenom ||
-                                pairInfo.token1Meta.denom === this.baseDenom)
-                        ) {
-                            this.allPairs.set(pairAddress, { ...pairInfo });
-                            const message = `:new: New pair found: ${pairInfo.token0Meta.symbol}, ` +
-                                `${pairInfo.token1Meta.symbol}: ` +
-                                `\n<t:${txTime.unix()}:R>\n${pairInfo.seiscanLink}\ncreator: ${creatorAddress}`
+                        let baseAssetAmount = assetValues.map(asset => {
+                            const amountMatch = asset.match(/(\d+)usei/);
+                            return amountMatch ? amountMatch[1] : null;
+                        }).filter(amount => amount !== null)[0];
 
+                        let otherAmount = assetValues.map(asset => {
+                            const amountMatch = asset.match(/(\d+)/);
+                            return amountMatch ? amountMatch[0] : null;
+                        }).filter(amount => amount !== null)[0];
 
-                            this.sendMessageToDiscord(message);
-                            await this.calculateLiquidity(pairInfo);
+                        let contractAddress = undefined
+                        let lpAdderAddress = undefined
+                        let lpReceiverAddress = undefined
 
-                            console.log(`${pairAddress} liquidity: $${pairInfo.liquidity.toFixed(2)}`)
+                        // get the _contract_address attribute that is directly before the provide_liquidity attribute (the pair contract address)
+                        for (let i = 1; i < event.attributes.length; i++) {
+                            if (event.attributes[i].key === 'action' && event.attributes[i].value === 'provide_liquidity') {
+                                if (event.attributes[i - 1] && event.attributes[i - 1].key === '_contract_address') {
+                                    contractAddress = event.attributes[i - 1].value
+                                }
+                            }
+                        }
+
+                        // get the contract address of the person who added the liquidity 
+                        for (let i = 1; i < event.attributes.length; i++) {
+                            if (event.attributes[i].key === 'action' && event.attributes[i].value === 'provide_liquidity') {
+                                if (event.attributes[i + 3] && event.attributes[i + 3].key === 'from') {
+                                    lpAdderAddress = event.attributes[i + 3].value;
+                                }
+                            }
+                        }
+
+                        // get the contract address of the person who is getting the liquidity 
+                        for (let i = 1; i < event.attributes.length; i++) {
+                            if (event.attributes[i].key === 'action' && event.attributes[i].value === 'provide_liquidity') {
+                                if (event.attributes[i + 2] && event.attributes[i + 2].key === 'receiver') {
+                                    lpReceiverAddress = event.attributes[i + 2].value;
+                                }
+                            }
+                        }
+
+                        if (!this.allPairs.has(contractAddress) && !this.ignoredPairs.has(contractAddress)) {
+                            let pair = await this.getPairInfo(contractAddress)
+
+                            if (!pair) continue
+                            pair.lpAdderAddress = lpAdderAddress
+                            pair.lpReceiverAddress = lpReceiverAddress
+
+                            const pairName = `${pair.token0Meta.symbol}, ${pair.token1Meta.symbol}`;
+                            const memeTokenMeta = pair.token0Meta.denom === this.baseDenom ? pair.token1Meta : pair.token0Meta;
 
                             if (
-                                pairInfo.liquidity > this.lowLiquidityThreshold &&
-                                pairInfo.liquidity < this.highLiquidityThreshold &&
-                                txTime > moment().subtract(10, 'seconds')
+                                pair &&
+                                pair.token0Meta &&
+                                pair.token1Meta &&
+                                this.pairType === JSON.stringify(pair.pair_type) &&
+                                (pair.token0Meta.denom === this.baseDenom ||
+                                    pair.token1Meta.denom === this.baseDenom) &&
+                                (!pair.token0Meta.denom.includes("ibc") &&
+                                    !pair.token1Meta.denom.includes("ibc")
+                                )
                             ) {
-                                await this.buyMemeToken(pairInfo, this.snipeAmount);
-                            } else {
-                                this.startMonitorPairForLiq(pairAddress);
+                                this.allPairs.set(contractAddress, { ...pair });
+
+                                const message = `New pair found: ${pair.token0Meta.symbol}, ` +
+                                    `${pair.token1Meta.symbol}: \n` +
+                                    `${pair.seiscanLink}`;
+
+                                console.log(message.bgMagenta)
+
+                                const baseAssetDecimals = 6;
+                                const baseAssetPrice = this.baseAssetPrice || 0;
+
+                                const numericBaseAssetAmount = Number(baseAssetAmount) / 10 ** baseAssetDecimals;
+                                const numericOtherAssetAmount = Number(otherAmount) / 10 ** memeTokenMeta.decimals;
+
+                                let liquidity = numericBaseAssetAmount * baseAssetPrice;
+                                liquidity = (liquidity * 2) / Math.pow(10, 0)
+
+                                console.log(
+                                    `${pairName} liquidity added: $${liquidity} ${txTime}\n` +
+                                    `${numericBaseAssetAmount} ${this.baseAssetName}, ${numericOtherAssetAmount} ${memeTokenMeta.symbol}\n` +
+                                    `LP added by: https://www.seiscan.app/pacific-1/accounts/${lpAdderAddress}\n` +
+                                    `LP held by: https://www.seiscan.app/pacific-1/accounts/${lpReceiverAddress}\n` +
+                                    `provide_liquidity tx: https://www.seiscan.app/pacific-1/txs/${txResponse.txhash}`
+                                );
+
+                                if (txTime < moment().subtract(1, 'minute')) {
+                                    console.log(`liq added over time limit: ${txTime.fromNow()}`)
+                                    return
+                                }
+
+                                if (liquidity > 1 && liquidity < this.lowLiquidityThreshold && txTime > moment().subtract(1, 'minute')) {
+                                    console.log("small amount of liquidity added")
+                                    this.sendMessageToDiscord(
+                                        `:eyes: ${pairName} - Small liquidity added: $${liquidity.toFixed(2)}\n` +
+                                        `<t:${txTime.unix()}:R>\n` +
+                                        `${numericBaseAssetAmount} ${this.baseAssetName}, ${numericOtherAssetAmount} ${memeTokenMeta.symbol}\n` +
+                                        `provide_liquidity tx: https://www.seiscan.app/pacific-1/txs/${txResponse.txhash}\n` +
+                                        `LP added by: https://www.seiscan.app/pacific-1/accounts/${lpAdderAddress}\n` +
+                                        `LP held by: https://www.seiscan.app/pacific-1/accounts/${lpReceiverAddress}\n` +
+                                        `pair contract: ${pair.seiscanLink}`
+                                    )
+
+                                    return;
+                                }
+
+                                if (
+                                    liquidity > this.lowLiquidityThreshold &&
+                                    liquidity < this.highLiquidityThreshold &&
+                                    txTime > moment().subtract(1, 'minute')
+                                ) {
+                                    this.sendMessageToDiscord(
+                                        `:eyes: ${pairName} - Liquidity added: $${liquidity.toFixed(2)}\n` +
+                                        `<t:${txTime.unix()}:R>\n` +
+                                        `${numericBaseAssetAmount} ${this.baseAssetName}, ${numericOtherAssetAmount} ${memeTokenMeta.symbol}\n` +
+                                        `provide_liquidity tx: https://www.seiscan.app/pacific-1/txs/${txResponse.txhash}\n` +
+                                        `LP added by: https://www.seiscan.app/pacific-1/accounts/${lpAdderAddress}\n` +
+                                        `LP held by: https://www.seiscan.app/pacific-1/accounts/${lpReceiverAddress}\n` +
+                                        `pair contract: ${pair.seiscanLink}`
+                                    )
+
+                                    await this.buyMemeToken(pair, this.snipeAmount);
+                                    return;
+                                }
                             }
-                        } else {
-                            console.log(`Ignored pair ${pairAddress}:, ${JSON.stringify(pairInfo, null, 2)}`);
-                            this.sendMessageToDiscord(`Ignored new pair https://www.seiscan.app/pacific-1/contracts/${pairAddress}`);
-                            this.ignoredPairs.add(pairAddress);
+                            else {
+                                console.log(`Ignored pair ${contractAddress}, ${JSON.stringify(pair, null, 2)}`);
+                                this.sendMessageToDiscord(`Ignored new pair https://dexscreener.com/injective/${contractAddress}`);
+                                this.ignoredPairs.add(contractAddress);
+                            }
                         }
                     }
                 }
             }
 
-            const endTime = new Date().getTime();
-            const executionTime = endTime - startTime;
-            // console.log(`Finished check for new pairs in ${executionTime} milliseconds`.gray);
-        } catch (error) {
-            console.error('Error in checkFactoryForNewPairs:', error);
-            // You can add additional error handling logic here if needed.
+            // const endTime = new Date().getTime();
+            // const executionTime = endTime - startTime;
+            // console.log(`Finished check for provide_liquidity in ${executionTime} milliseconds`.gray);
+        }
+        catch (error) {
+            console.log(`error when checking for provide liquidity`, error || error.message)
         }
     }
 
-    async checkPairForProvideLiquidity(pairContract) {
+    async checkForWithdrawLiquidity(pages = 1) {
         try {
-            let pair = await this.getPairInfo(pairContract)
-            const pairName = `${pair.token0Meta.symbol}, ${pair.token1Meta.symbol}`;
-
             const startTime = new Date().getTime();
 
-            const transactions = await this.queryClient.cosmos.tx.v1beta1.getTxsEvent({
-                events: `wasm._contract_address='${pairContract}'`,
-                orderBy: 2,
-                pagination: 0
-            });
+            for (let i = 0; i < pages; i++) {
+                const transactions = await this.queryClient.cosmos.tx.v1beta1.getTxsEvent({
+                    events: `wasm.action='withdraw_liquidity'`,
+                    orderBy: 2,
+                    pagination: i
+                });
 
-            for (const txResponse of transactions.tx_responses) {
-                const txTime = moment(txResponse['timestamp'], 'YYYY-MM-DD HH:mm:ss.SSS Z');
-                let json = JSON.parse(txResponse.raw_log)
+                for (const txResponse of transactions.tx_responses) {
+                    const txTime = moment(txResponse['timestamp'], 'YYYY-MM-DD HH:mm:ss.SSS Z');
+                    let json = JSON.parse(txResponse.raw_log)
 
-                for (const i in json) {
-                    let event = json[i].events.find(x => x.type == "wasm")
-                    if (!event || !event.attributes) continue
-                    let isProvideLiquidity = event.attributes.find(x => x.key == "action" && x.value == "provide_liquidity")
-                    if (!isProvideLiquidity) continue
+                    for (const j in json) {
+                        let event = json[j].events.find(x => x.type == "wasm")
+                        if (!event || !event.attributes) continue
+                        let isWithdrawLiquidity = event.attributes.find(x => x.key == "action" && x.value == "withdraw_liquidity")
+                        if (!isWithdrawLiquidity) continue
 
-                    let baseAssetAmount = event.attributes.find(x => x.key == "assets").value.split(',')[1].split("usei")[0]
+                        let assetValues = event.attributes.find(x => x.key === "refund_assets").value.split(',');
 
-                    const baseAssetDecimals = 6;
-                    const baseAssetPrice = this.baseAssetPrice || 0;
+                        let baseAssetAmount = assetValues.map(asset => {
+                            const amountMatch = asset.match(/(\d+)usei/);
+                            return amountMatch ? amountMatch[1] : null;
+                        }).filter(amount => amount !== null)[0];
 
-                    const numericBaseAssetAmount = Number(baseAssetAmount) / 10 ** baseAssetDecimals;
-                    let liquidity = numericBaseAssetAmount * baseAssetPrice;
-                    liquidity = (liquidity * 2) / Math.pow(10, 0)
-                    pair.liquidity = liquidity
-                    console.log(`${pairName} liquidity added: $${liquidity}`);
+                        let otherAmount = assetValues.map(asset => {
+                            const amountMatch = asset.match(/(\d+)/);
+                            return amountMatch ? amountMatch[0] : null;
+                        }).filter(amount => amount !== null)[0];
 
-                    if (txTime < moment().subtract(1, 'minute')) {
-                        console.log(`liq added over time limit: ${txTime.fromNow()}`)
-                        this.stopMonitorPairForLiq(pairContract);
-                        return
-                    }
+                        let contractAddress = undefined
+                        let senderAddress = undefined
+                        let lpReceiverAddress = undefined
 
-                    if (liquidity > 20 && liquidity < this.lowLiquidityThreshold && txTime > moment().subtract(1, 'minute')) {
-                        this.stopMonitorPairForLiq(pairContract);
-                        console.log("small amount of liquidity added")
-                        this.sendMessageToDiscord(`:eyes: ${pairName} - Small liquidity added: $${liquidity.toFixed(2)}\n` +
-                            `<t:${txTime.unix()}:R>\n${pair.astroportLink}\n${pair.coinhallLink}\n<@352761566401265664>`)
-                        // await this.buyMemeToken(pair, this.snipeAmount / 10);
-                        // await this.monitorPairForPriceChange(pair, 5, 5, 5)
-                        return;
-                    }
+                        // get the _contract_address attribute that is directly before the provide_liquidity attribute (the pair contract address)
+                        for (let i = 1; i < event.attributes.length; i++) {
+                            if (event.attributes[i].key === 'action' && event.attributes[i].value === 'withdraw_liquidity') {
+                                if (event.attributes[i - 1] && event.attributes[i - 1].key === '_contract_address') {
+                                    contractAddress = event.attributes[i - 1].value
+                                }
+                            }
+                        }
 
-                    if (liquidity > this.lowLiquidityThreshold && txTime > moment().subtract(1, 'minute')) {
-                        this.stopMonitorPairForLiq(pairContract);
-                        this.sendMessageToDiscord(`:eyes: ${pairName} - Liquidity added $${liquidity.toFixed(2)}\n` +
-                            `<t:${txTime.unix()}:R>\n${pair.astroportLink}\n${pair.coinhallLink}\n<@352761566401265664>`)
-                        await this.buyMemeToken(pair, this.snipeAmount);
-                        return;
+                        for (let i = 1; i < event.attributes.length; i++) {
+                            if (event.attributes[i].key === 'action' && event.attributes[i].value === 'withdraw_liquidity') {
+                                if (event.attributes[i + 1] && event.attributes[i + 1].key === 'sender') {
+                                    senderAddress = event.attributes[i + 1].value
+                                }
+                            }
+                        }
+
+                        for (let i = 1; i < event.attributes.length; i++) {
+                            if (event.attributes[i].key === 'action' && event.attributes[i].value === 'transfer') {
+                                if (event.attributes[i + 2] && event.attributes[i + 2].key === 'to') {
+                                    lpReceiverAddress = event.attributes[i + 2].value
+                                }
+                            }
+                        }
+
+                        if (this.allPairs.has(contractAddress) && !this.ruggedPairs.has(contractAddress)) {
+                            let pair = await this.getPairInfo(contractAddress)
+                            const pairName = `${pair.token0Meta.symbol}, ${pair.token1Meta.symbol}`;
+                            const memeTokenMeta = pair.token0Meta.denom === this.baseDenom ? pair.token1Meta : pair.token0Meta;
+
+                            const baseAssetDecimals = 6;
+                            const baseAssetPrice = this.baseAssetPrice || 0;
+
+                            const numericBaseAssetAmount = Number(baseAssetAmount) / 10 ** baseAssetDecimals;
+                            const numericOtherAssetAmount = Number(otherAmount) / 10 ** memeTokenMeta.decimals;
+
+                            let liquidity = numericBaseAssetAmount * baseAssetPrice;
+                            liquidity = (liquidity * 2) / Math.pow(10, 0)
+
+                            if (txTime > moment().subtract(1, 'minute') && liquidity < 5) {
+                                this.sendMessageToDiscord(
+                                    `:eyes: ${pairName} - Liquidity rugged: $${liquidity.toFixed(2)}\n` +
+                                    `<t:${txTime.unix()}:R>\n` +
+                                    `${numericBaseAssetAmount} ${this.baseAssetName}, ${numericOtherAssetAmount} ${memeTokenMeta.symbol}\n` +
+                                    `withdraw_liquidity tx: https://www.seiscan.app/pacific-1/txs/${txResponse.txhash}\n` +
+                                    `withdrew by: https://www.seiscan.app/pacific-1/accounts/${senderAddress}\n` +
+                                    `sent to: https://www.seiscan.app/pacific-1/accounts/${lpReceiverAddress}\n` +
+                                    `pair contract: ${pair.seiscanLink}`
+                                )
+                            }
+                            if (liquidity < 5) {
+                                this.ruggedPairs.add(contractAddress)
+                            }
+                        }
                     }
                 }
             }
-
-            const endTime = new Date().getTime();
-            const executionTime = endTime - startTime;
-            // console.log(`Finished check for liq for pair ${pairName} in ${executionTime} milliseconds`.gray);
+            // const endTime = new Date().getTime();
+            // const executionTime = endTime - startTime;
+            // console.log(`Finished check for withdraw_liquidity in ${executionTime} milliseconds`.gray);
         }
         catch (error) {
-            console.error(`Error when checking pair for provide liq: `, error.message || error)
-        }
-    }
-
-    startMonitorPairForLiq(pair) {
-        this.lowLiqPairsToMonitor.add(pair)
-        if (this.lowLiqPairsToMonitor.size == 1) {
-            this.liquidityLoop()
-        }
-    }
-
-    stopMonitorPairForLiq(pair) {
-        this.lowLiqPairsToMonitor.delete(pair)
-    }
-
-    async liquidityLoop() {
-        while (this.lowLiqPairsToMonitor.size > 0) {
-            for (const pair of this.lowLiqPairsToMonitor.values()) {
-                await this.checkPairForProvideLiquidity(pair);
-            }
-            await new Promise(resolve => setTimeout(resolve, 100));
+            console.log(`error when checking for withdraw liquidity`, error || error.message)
         }
     }
 
     setMonitorNewPairs(monitor) {
         this.monitorNewPairs = monitor
+        console.log(`new pairs loop: ${this.monitorNewPairs}`.bgCyan)
+
         if (monitor) {
-            this.sendMessageToDiscord('Monitoring for new pairs')
+            this.sendMessageToDiscord(':dart: Begin monitoring for new Astroport liquidity')
             this.newPairsLoop()
+        }
+        else {
+            this.sendMessageToDiscord(':pause_button: Stop monitoring for new Astroport liquidity')
         }
     }
 
     async newPairsLoop() {
-        console.log(`new pairs loop: ${this.monitorNewPairs}`.bgCyan)
         while (this.monitorNewPairs) {
-            await this.checkFactoryForNewPairs();
-            await new Promise(resolve => setTimeout(resolve, 1000));
+            await this.checkForProvideLiquidity();
+            await new Promise(resolve => setTimeout(resolve, 100));
+        }
+    }
+
+    setMonitorRugs(monitor) {
+        this.monitorRugs = monitor
+        console.log(`rugs loop: ${this.monitorRugs}`.bgCyan)
+        if (monitor) {
+            this.rugsLoop()
+        }
+    }
+
+    async rugsLoop() {
+        while (this.monitorRugs) {
+            await this.checkForWithdrawLiquidity();
+            await new Promise(resolve => setTimeout(resolve, 2000));
         }
     }
 

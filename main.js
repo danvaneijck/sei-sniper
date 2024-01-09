@@ -1,4 +1,4 @@
-const SeiSniper = require("./snipe")
+const SeiSniper = require("./modules/snipe")
 
 const LIVE_TRADING = true
 
@@ -14,13 +14,14 @@ const CONFIG = {
     ],
     pairType: '{"xyk":{}}',         // only basic 50 / 50 liquidity pairs
     maxSpread: 0.49,                // %
-    snipeAmount: 1,                 // sei
-    profitGoalPercent: 10,          // %
-    moonBagPercent: 0,              // %
+    snipeAmount: 5,                 // sei
+    profitGoalPercent: 20,          // %
+    moonBagPercent: 0.10,           // %
     stopLoss: 20,                   // %
     tradeTimeLimit: 5,              // minutes
-    lowLiquidityThreshold: 500,     // USD $
+    lowLiquidityThreshold: 2500,    // USD $
     highLiquidityThreshold: 100000, // USD $
+    discordMessagesEnabled: true
 }
 
 const main = async () => {
@@ -28,9 +29,11 @@ const main = async () => {
     const seiSniper = new SeiSniper(CONFIG);
 
     await seiSniper.initialize();
+    await seiSniper.getPortfolio()
 
     seiSniper.startMonitoringBasePair(2)
     seiSniper.setMonitorNewPairs(true)
+    seiSniper.setMonitorRugs(true)
 
 };
 
