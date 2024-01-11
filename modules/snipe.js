@@ -126,6 +126,41 @@ class SeiSniper {
                         .addStringOption(option => option.setName('pair').setDescription('The pair to monitor').setRequired(true))
                         .setDescription('Monitor a pair for opportunity to sell')
                     );
+                    guild.commands.create(new SlashCommandBuilder()
+                        .setName('set_live_trading')
+                        .addBooleanOption(option => option.setName('live').setDescription('Is trading live?').setRequired(true))
+                        .setDescription('Set live trading mode on or off')
+                    );
+                    guild.commands.create(new SlashCommandBuilder()
+                        .setName('set_monitor_new_pairs')
+                        .addBooleanOption(option => option.setName('monitor_pairs').setDescription('Monitor for new pairs?').setRequired(true))
+                        .setDescription('Set monitoring for new pairs on or off')
+                    );
+                    guild.commands.create(new SlashCommandBuilder()
+                        .setName('start_monitor_pair_for_liquidity')
+                        .addStringOption(option => option.setName('pair').setDescription('The pair to monitor').setRequired(true))
+                        .setDescription('Monitor a pair for added liquidity')
+                    );
+                    guild.commands.create(new SlashCommandBuilder()
+                        .setName('stop_monitor_pair_for_liquidity')
+                        .addStringOption(option => option.setName('pair').setDescription('The pair to stop monitoring').setRequired(true))
+                        .setDescription('Stop monitoring a pair for added liquidity')
+                    );
+                    guild.commands.create(new SlashCommandBuilder()
+                        .setName('set_config')
+                        .addNumberOption(option => option.setName('snipe_amount').setDescription('The snipe amount').setRequired(true))
+                        .addNumberOption(option => option.setName('stop_loss').setDescription('The stop loss % 1 - 100').setRequired(true))
+                        .addNumberOption(option => option.setName('profit_goal').setDescription('The profit goal % 1 - 100').setRequired(true))
+                        .addNumberOption(option => option.setName('moon_bag').setDescription('The moon bag % 0.0 - 1.0').setRequired(true))
+                        .addNumberOption(option => option.setName('low_liq_threshold').setDescription('The low liquidity threshold $').setRequired(true))
+                        .addNumberOption(option => option.setName('high_liq_threshold').setDescription('The high liquidity threshold $').setRequired(true))
+                        .addNumberOption(option => option.setName('trade_time_limit').setDescription('The trade time limit in minutes').setRequired(true))
+                        .setDescription('Set the trading parameters')
+                    );
+                    guild.commands.create(new SlashCommandBuilder()
+                        .setName('get_status')
+                        .setDescription('Get the current bot status')
+                    );
                 });
                 console.log("set up discord slash commands".gray)
             });
@@ -186,6 +221,71 @@ class SeiSniper {
                 await interaction.reply("Monitoring token to sell");
                 const pairContract = interaction.options.getString('pair');
                 await this.executeMonitorToSellCommand(pairContract);
+            }
+            if (commandName === 'set_live_trading') {
+                const live = interaction.options.getBoolean('live');
+                this.live = live
+                await interaction.reply(`Set live trading to ${live}`);
+            }
+            if (commandName === 'set_monitor_new_pairs') {
+                const monitor_pairs = interaction.options.getBoolean('monitor_pairs');
+                this.setMonitorNewPairs(monitor_pairs)
+                await interaction.reply(`Set monitor new pairs to ${monitor_pairs}`);
+            }
+            if (commandName === 'start_monitor_pair_for_liquidity') {
+                const pairContract = interaction.options.getString('pair');
+                this.startMonitorPairForLiq(pairContract)
+                let pair = await this.getPairInfo(pairContract)
+                const pairName = `${pair.token0Meta.symbol}, ${pair.token1Meta.symbol}`;
+                await interaction.reply(`:arrow_forward: Began monitoring ${pairName} for liquidity`);
+            }
+            if (commandName === 'stop_monitor_pair_for_liquidity') {
+                const pairContract = interaction.options.getString('pair');
+                this.stopMonitorPairForLiq(pairContract)
+                let pair = await this.getPairInfo(pairContract)
+                const pairName = `${pair.token0Meta.symbol}, ${pair.token1Meta.symbol}`;
+                await interaction.reply(`:stop_button: Stopped monitoring ${pairName} for liquidity`);
+            }
+            if (commandName === 'set_config') {
+                const snipeAmount = interaction.options.getNumber('snipe_amount');
+                const profitGoal = interaction.options.getNumber('stop_loss');
+                const stopLoss = interaction.options.getNumber('profit_goal');
+                const moonBagPercent = interaction.options.getNumber('moon_bag');
+                const lowLiq = interaction.options.getNumber('low_liq_threshold');
+                const highLiq = interaction.options.getNumber('high_liq_threshold');
+                const timeLimit = interaction.options.getNumber('trade_time_limit');
+
+                this.snipeAmount = snipeAmount
+                this.profitGoalPercent = profitGoal
+                this.stopLoss = stopLoss
+                this.moonBagPercent = moonBagPercent
+                this.lowLiquidityThreshold = lowLiq
+                this.highLiquidityThreshold = highLiq
+                this.tradeTimeLimit = timeLimit
+
+                let message =
+                    `:gun: Snipe amount: ${this.snipeAmount} ${this.baseAssetName} ($${((this.baseAssetPrice / Math.pow(10, 0)) * this.snipeAmount).toFixed(2)})\n` +
+                    `:moneybag: Profit goal: ${this.profitGoalPercent}% :octagonal_sign: Stop loss: ${this.stopLoss}% :crescent_moon: Moon bag: ${this.moonBagPercent}\n` +
+                    `:arrow_down_small: Low liquidity threshold: $${this.lowLiquidityThreshold} :arrow_up_small: High liquidity threshold: $${this.highLiquidityThreshold}\n` +
+                    `:alarm_clock: Time limit: ${this.tradeTimeLimit} mins\n\n` +
+                    `Trading live: ${this.live ? ":white_check_mark:" : ":x:"}\n` +
+                    `Monitoring new pairs: ${this.monitorNewPairs ? ":white_check_mark:" : ":x:"}\n` +
+                    `Monitoring for rugs: ${this.monitorRugs ? ":white_check_mark:" : ":x:"}\n`
+
+                await interaction.reply(message);
+            }
+            if (commandName === 'get_status') {
+
+                let message =
+                    `:gun: Snipe amount: ${this.snipeAmount} ${this.baseAssetName} ($${((this.baseAssetPrice / Math.pow(10, 0)) * this.snipeAmount).toFixed(2)})\n` +
+                    `:moneybag: Profit goal: ${this.profitGoalPercent}% :octagonal_sign: Stop loss: ${this.stopLoss}% :crescent_moon: Moon bag: ${this.moonBagPercent}\n` +
+                    `:arrow_down_small: Low liquidity threshold: $${this.lowLiquidityThreshold} :arrow_up_small: High liquidity threshold: $${this.highLiquidityThreshold}\n` +
+                    `:alarm_clock: Time limit: ${this.tradeTimeLimit} mins\n\n` +
+                    `Trading live: ${this.live ? ":white_check_mark:" : ":x:"}\n` +
+                    `Monitoring new pairs: ${this.monitorNewPairs ? ":white_check_mark:" : ":x:"}\n` +
+                    `Monitoring for rugs: ${this.monitorRugs ? ":white_check_mark:" : ":x:"}\n`
+
+                await interaction.reply(message);
             }
         });
     }
@@ -667,8 +767,7 @@ class SeiSniper {
                     if (Math.abs(priceChangeToHighest) > priceChangeThreshold) {
                         let message = `:small_red_triangle_down: ${pairName} Price is down ${parseFloat(priceChangeToHighest).toFixed(2)}% in the last ` +
                             `${trackingDurationMinutes} minutes. current: $${parseFloat(currentPrice).toFixed(10)}, ` +
-                            `high: $${newHighestPrice.toFixed(10)}, liquidity: $${Math.round(pair.liquidity)}\n` +
-                            `${pair.coinhallLink}\n${pair.astroportLink}`
+                            `high: $${newHighestPrice.toFixed(10)}, liquidity: $${Math.round(pair.liquidity)}`
                         this.sendMessageToDiscord(message);
                         this.lastPrices.delete(pair.contract_addr);
                         lastPrices = [];
@@ -677,8 +776,7 @@ class SeiSniper {
                     if (priceChangeToLowest > priceChangeThreshold) {
                         let message = `:green_circle: ${pairName} price is up ${parseFloat(priceChangeToLowest).toFixed(2)}% in the last ` +
                             `${trackingDurationMinutes} minutes. current: $${parseFloat(currentPrice).toFixed(10)}, ` +
-                            `low: $${newLowestPrice.toFixed(10)}, liquidity: $${Math.round(pair.liquidity)}\n` +
-                            `${pair.coinhallLink}\n${pair.astroportLink}`;
+                            `low: $${newLowestPrice.toFixed(10)}, liquidity: $${Math.round(pair.liquidity)}`
                         this.sendMessageToDiscord(message);
                         this.lastPrices.delete(pair.contract_addr);
                         lastPrices = [];
@@ -1329,7 +1427,7 @@ class SeiSniper {
                                     `LP held by: https://www.seiscan.app/pacific-1/accounts/${lpReceiverAddress}\n` +
                                     `pair contract: ${pair.seiscanLink}`
                                 )
-
+                                this.monitorPairForPriceChange(pair, 10, 5, 5)
                                 return;
                             }
 
@@ -1355,8 +1453,11 @@ class SeiSniper {
                                         `LP held by: https://www.seiscan.app/pacific-1/accounts/${lpReceiverAddress}`
                                     )
                                 }
-                                else {
+                                else if (this.live) {
                                     await this.buyMemeToken(pair, this.snipeAmount);
+                                }
+                                else {
+                                    this.monitorPairForPriceChange(pair, 10, 10, 5)
                                 }
 
                                 return;
@@ -1461,7 +1562,7 @@ class SeiSniper {
 
                         if (txTime > moment().subtract(1, 'minute') && (!current_liquidity || current_liquidity < 5)) {
                             this.sendMessageToDiscord(
-                                `:eyes: ${pairName} - Liquidity rugged: $${liquidity_rugged.toFixed(2)}, current liquidity: $${current_liquidity.toFixed(2)}\n` +
+                                `:small_red_triangle_down: :small_red_triangle_down: ${pairName} - Liquidity rugged: $${liquidity_rugged.toFixed(2)}, current liquidity: $${current_liquidity.toFixed(2)}\n` +
                                 `<t:${txTime.unix()}:R>\n` +
                                 `${numericBaseAssetAmount} ${this.baseAssetName}, ${numericOtherAssetAmount} ${memeTokenMeta.symbol}\n` +
                                 `withdraw_liquidity tx: https://www.seiscan.app/pacific-1/txs/${txResponse.txhash}\n` +
@@ -1472,6 +1573,7 @@ class SeiSniper {
                         }
                         if (!current_liquidity || current_liquidity < 5) {
                             this.ruggedPairs.add(contractAddress)
+                            this.stopMonitoringPairForPriceChange(pair)
                             if (senderAddress) this.scammerList.add(senderAddress)
                             if (lpReceiverAddress) this.scammerList.add(lpReceiverAddress)
                             if (pair.lpAdderAddress) this.scammerList.add(pair.lpAdderAddress)

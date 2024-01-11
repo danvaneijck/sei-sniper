@@ -43,9 +43,9 @@ class TransactionManager {
         }
     }
 
-    async signAndBroadcastTransaction(msg, memo = '') {
+    async signAndBroadcastTransaction(msg, memo = 'sniper bot @trippykiwi') {
         try {
-            const fee = calculateFee(800000, "0.1usei");
+            const fee = calculateFee(600000, "0.1usei");
             const result = await this.signingCosmWasmClient.execute(msg.sender, msg.contractAddress, msg.msg, fee, memo, msg.funds);
             return result
         } catch (error) {

@@ -1,11 +1,17 @@
 const SeiSniper = require("./modules/snipe")
 
-const LIVE_TRADING = true
+const LIVE_TRADING = false
+
+const seiyanRPC = "https://rpc.seiyan.tech"
+const seiyanREST = "https://rest.seiyan.tech"
+
+const rpc = "https://rpc.sei-apis.com/"
+const rest = "https://rest.sei-apis.com/"
 
 const CONFIG = {
     live: LIVE_TRADING,
-    rpc: "https://rpc.sei-apis.com/",
-    rest: "https://rest.sei-apis.com/",
+    rpc: rpc,
+    rest: rest,
     chainId: "pacific-1",
     tokenTypes: [
         'native',
@@ -14,12 +20,12 @@ const CONFIG = {
     ],
     pairType: '{"xyk":{}}',         // only basic 50 / 50 liquidity pairs
     maxSpread: 0.49,                // %
-    snipeAmount: 5,                 // sei
+    snipeAmount: 10,                // sei
     profitGoalPercent: 40,          // %
     moonBagPercent: 0.20,           // %
     stopLoss: 40,                   // %
     tradeTimeLimit: 5,              // minutes
-    lowLiquidityThreshold: 2500,    // USD $
+    lowLiquidityThreshold: 10000,   // USD $
     highLiquidityThreshold: 100000, // USD $
     discordMessagesEnabled: true
 }
