@@ -1,6 +1,6 @@
 const SeiSniper = require("./modules/snipe")
 
-const LIVE_TRADING = false
+const LIVE_TRADING = true
 
 const seiyanRPC = "https://rpc.seiyan.tech"
 const seiyanREST = "https://rest.seiyan.tech"
@@ -20,12 +20,12 @@ const CONFIG = {
     ],
     pairType: '{"xyk":{}}',         // only basic 50 / 50 liquidity pairs
     maxSpread: 0.49,                // %
-    snipeAmount: 10,                // sei
+    snipeAmount: 5,                 // sei
     profitGoalPercent: 40,          // %
     moonBagPercent: 0.20,           // %
     stopLoss: 40,                   // %
-    tradeTimeLimit: 5,              // minutes
-    lowLiquidityThreshold: 10000,   // USD $
+    tradeTimeLimit: 30,             // minutes
+    lowLiquidityThreshold: 4000,    // USD $
     highLiquidityThreshold: 100000, // USD $
     discordMessagesEnabled: true
 }
@@ -37,7 +37,7 @@ const main = async () => {
     await seiSniper.initialize();
     await seiSniper.getPortfolio()
 
-    seiSniper.startMonitoringBasePair(2)
+    seiSniper.startMonitoringBasePair(10)
     seiSniper.setMonitorNewPairs(true)
     seiSniper.setMonitorRugs(true)
 
