@@ -1,6 +1,6 @@
-const SeiSniper = require("./modules/snipe")
+const SeiSniper = require("./modules/Snipe")
 
-const LIVE_TRADING = true
+const LIVE_TRADING = false
 
 const seiyanRPC = "https://rpc.seiyan.tech"
 const seiyanREST = "https://rest.seiyan.tech"

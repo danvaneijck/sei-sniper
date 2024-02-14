@@ -9,7 +9,7 @@ const { SlashCommandBuilder } = require('@discordjs/builders');
 const moment = require('moment');
 const fs = require('fs/promises');
 const path = require('path')
-const TransactionManager = require("./transactions")
+const TransactionManager = require("./Transactions")
 var colors = require("colors");
 colors.enable();
 require('dotenv').config();
@@ -310,10 +310,10 @@ class SeiSniper {
                 return
             }
             await this.calculateLiquidity(pair)
-            if (pair.liquidity < this.lowLiquidityThreshold) {
+            // if (pair.liquidity < this.lowLiquidityThreshold) {
 
-                return
-            }
+            //     return
+            // }
             let result = await this.buyMemeToken(pair, amount)
             if (result && !this.allPairs.has(pairContract)) {
                 this.allPairs.set(pairContract, pair);
@@ -853,8 +853,8 @@ class SeiSniper {
     }
 
     async buyMemeToken(pair, amount, retries = 5) {
-        if (!pair || !this.live) {
-            console.error("Invalid pair or live trading not enabled");
+        if (!pair) {
+            console.error("Invalid pair");
             return;
         }
 
