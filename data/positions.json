@@ -1,1 +1,11 @@
-[]
+[
+  {
+    "pair_contract": "sei1tve8f449cq4v3u2eu075nwnxtg2s8yzsz28azyrdr9k5rw0d5d4q0jxtwk",
+    "balance": 297611940298,
+    "amount_in": 0,
+    "token_denom": "sei1t07yl53e53yj9kgsh4j2taj5nk4c56vjc6r7nw0l7wuxsp9xh06q6stf0x",
+    "time_bought": "2024-03-20T14:33:03.540Z",
+    "profit": 800428,
+    "is_moon_bag": true
+  }
+]

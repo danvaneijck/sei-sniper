@@ -25,7 +25,7 @@ const CONFIG = {
     moonBagPercent: 0.20,           // %
     stopLoss: 40,                   // %
     tradeTimeLimit: 30,             // minutes
-    lowLiquidityThreshold: 4000,    // USD $
+    lowLiquidityThreshold: 1000,    // USD $
     highLiquidityThreshold: 100000, // USD $
     discordMessagesEnabled: true
 }
